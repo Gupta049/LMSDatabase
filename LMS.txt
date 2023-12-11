@@ -1,0 +1,2772 @@
+mysql> create database LEARNING_MANAGEMENT_SYSTEMS;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> show databases;
++-----------------------------+
+| Database                    |
++-----------------------------+
+| addressbookdatabase         |
+| information_schema          |
+| learning_management_system  |
+| learning_management_systems |
+| mysql                       |
+| payroll_services            |
+| performance_schema          |
+| sys                         |
++-----------------------------+
+8 rows in set (0.00 sec)
+
+mysql> use LEARNING_MANAGEMENT_SYSTEMS;
+Database changed
+mysql> CREATE TABLE Mst_UserDetails (    Id INT AUTO_INCREMENT PRIMARY KEY,    email VARCHAR(30) NOT NULL,    first_name VARCHAR(20) NOT NULL,    last_name VARCHAR(20) NOT NULL,    Password VARCHAR(20) NOT NULL,    contact_number VARCHAR(20),    verified BOOLEAN NOT NULL DEFAULT FALSE,    creator_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    creator_user INT);
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> desc Mst_UserDetails;
++----------------+-------------+------+-----+-------------------+-------------------+
+| Field          | Type        | Null | Key | Default           | Extra             |
++----------------+-------------+------+-----+-------------------+-------------------+
+| Id             | int         | NO   | PRI | NULL              | auto_increment    |
+| email          | varchar(30) | NO   |     | NULL              |                   |
+| first_name     | varchar(20) | NO   |     | NULL              |                   |
+| last_name      | varchar(20) | NO   |     | NULL              |                   |
+| Password       | varchar(20) | NO   |     | NULL              |                   |
+| contact_number | varchar(20) | YES  |     | NULL              |                   |
+| verified       | tinyint(1)  | NO   |     | 0                 |                   |
+| creator_stamp  | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| creator_user   | int         | YES  |     | NULL              |                   |
++----------------+-------------+------+-----+-------------------+-------------------+
+9 rows in set (0.01 sec)
+
+mysql> CREATE TABLE Mst_HiredCandidate (    Id INT AUTO_INCREMENT PRIMARY KEY,    FirstName VARCHAR(20) NOT NULL,    MiddleName VARCHAR(20),    LastName VARCHAR(20) NOT NULL,    EmailId VARCHAR(30) NOT NULL,    HiredCity VARCHAR(20),    Degree VARCHAR(10),    HiredDate DATE,    MobileNumber VARCHAR(20),    PermanentPincode VARCHAR(15),    HiredLab VARCHAR(20),    Attitude VARCHAR(10),    CommunicationRemark VARCHAR(100),    KnowledgeRemark VARCHAR(50),    AggregateRemark VARCHAR(100),    Status VARCHAR(20),    CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    CreatorUser INT);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc Mst_HiredCandidate;
++---------------------+--------------+------+-----+-------------------+-------------------+
+| Field               | Type         | Null | Key | Default           | Extra             |
++---------------------+--------------+------+-----+-------------------+-------------------+
+| Id                  | int          | NO   | PRI | NULL              | auto_increment    |
+| FirstName           | varchar(20)  | NO   |     | NULL              |                   |
+| MiddleName          | varchar(20)  | YES  |     | NULL              |                   |
+| LastName            | varchar(20)  | NO   |     | NULL              |                   |
+| EmailId             | varchar(30)  | NO   |     | NULL              |                   |
+| HiredCity           | varchar(20)  | YES  |     | NULL              |                   |
+| Degree              | varchar(10)  | YES  |     | NULL              |                   |
+| HiredDate           | date         | YES  |     | NULL              |                   |
+| MobileNumber        | varchar(20)  | YES  |     | NULL              |                   |
+| PermanentPincode    | varchar(15)  | YES  |     | NULL              |                   |
+| HiredLab            | varchar(20)  | YES  |     | NULL              |                   |
+| Attitude            | varchar(10)  | YES  |     | NULL              |                   |
+| CommunicationRemark | varchar(100) | YES  |     | NULL              |                   |
+| KnowledgeRemark     | varchar(50)  | YES  |     | NULL              |                   |
+| AggregateRemark     | varchar(100) | YES  |     | NULL              |                   |
+| Status              | varchar(20)  | YES  |     | NULL              |                   |
+| CreatorStamp        | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser         | int          | YES  |     | NULL              |                   |
++---------------------+--------------+------+-----+-------------------+-------------------+
+18 rows in set (0.00 sec)
+
+mysql> INSERT INTO Mst_HiredCandidate (FirstName, MiddleName, LastName, EmailId, HiredCity, Degree, HiredDate, MobileNumber, PermanentPincode, HiredLab, Attitude, CommunicationRemark, KnowledgeRemark, AggregateRemark, Status, CreatorUser) VALUES ('Sushil', 'Kumar', 'Gupta', 'sushilgupta123@email.com', 'Bangalore', 'B.Tech', '2023-09-17', '6205806083', '400001', 'Lab3', 'Positive', 'Excellent communicator', 'Strong technical skills', 'Top-tech candidate', 'Accepted', 1),('Rakesh', 'Kumar', 'Pandey', 'rkp65@email.com', 'Delhi', 'B.E', '2023-02-10', '8765432109', '110001', 'Lab2', 'Positive', 'Great interpersonal skills', 'Deep technical knowledge', 'Exceptional performance', 'Accepted', 2),('Amit', 'Kumar', 'Verma', 'amit.verma@email.com', 'Bangalore', 'B.E', '2023-03-15', '7890123456', '560001', 'Lab3', 'Positive', 'Effective communicator', 'Solid technical expertise', 'Outstanding profile', 'Pending', 1),('Bikesh', '', 'Yadav', 'bikesh.yadav@email.com', 'Mumbai', 'B.Tech', '2023-04-20', '9876543210', '400001', 'Lab1', 'Positive', 'Clear and concise communication', 'In-depth knowledge', 'Impressive candidate', 'Pending', 1),('Arjun', 'Kumar', 'Shukla', 'arjun.shukla@email.com', 'Delhi', 'B.E', '2023-05-25', '8765432109', '110001', 'Lab2', 'Positive', 'Excellent communication skills', 'Extensive research expertise', 'Top-tier candidate', 'Accepted', 2),('Sumesh', 'Kumar', 'Maurya', 'sumesh.maurya@email.com', 'Bangalore', 'B.Sc', '2023-06-30', '7890123456', '560001', 'Lab3', 'Positive', 'Engaging communication style', 'Strong analytical skills', 'Exceptional performance', 'Pending', 3),('Aditya', '', 'Sharma', 'aditya.sharma@email.com', 'Mumbai', 'B.E', '2023-07-05', '9876543210', '400001', 'Lab1', 'Positive', 'Effective communicator', 'Technically Good', 'Impressive overall profile', 'Pending', 3),('Swapnil', 'Shivaji', 'Patil', 'swapnil.patil@email.com', 'Delhi', 'B.Tech', '2023-08-10', '8765432109', '110001', 'Lab2', 'Positive', 'Good interpersonal skills', 'Revise Technical Knowledge ', 'Average', 'Rejected', 2),('Sanket', '', 'Jadhaw', 'sanket.jadhaw@email.com', 'Bangalore', 'B.Tech', '2023-09-15', '7890123456', '560001', 'Lab3', 'Positive', 'Clear and effective communication', 'Solid technical skills', 'Outstanding performance', 'Accepted', 1),('Ishita', 'Raj', 'Patel', 'ishita.patel@email.com', 'Mumbai', 'B.E', '2023-10-20', '9876543210', '400001', 'Lab1', 'Positive', 'Excellent communicator', 'Strong technical skills', 'Top-notch candidate', 'Pending', 1),('Vihan', 'Singh', 'Sharma', 'vihan.sharma@email.com', 'Delhi', 'B.Tech', '2023-11-25', '8765432109', '110001', 'Lab2', 'Positive', 'Great interpersonal skills', 'need to revise deep technical knowledge', 'Ok', 'Pending', 1),('Aisha', '', 'Verma', 'aisha.verma@email.com', 'Bangalore', 'B.Tech', '2023-02-26', '7890123456', '560001', 'Lab3', 'Positive', 'Effective communicator', 'Solid technical expertise', 'Fine', 'Accepted', 2),('Aditya', 'Kumar', 'sharma', 'sharma.aditya@email.com', 'Mumbai', 'B.E', '2023-01-05', '9876543210', '400001', 'Lab1', 'Positive', 'lagging in communication', 'not know basics technical ', 'Average', 'Pending', 3),('Aaradhya', 'Singh', 'Shukla', 'aaradhya.shukla@email.com', 'Delhi', 'B.Tech', '2023-02-10', '8765432109', '110001', 'Lab2', 'Positive', 'Good communication skills', 'Not know basics concept', 'Average', 'Rejected', 1),('Reyansh', 'Kumar', 'Pandey', 'reyansh.pandey@email.com', 'Bangalore', 'B.Sc', '2023-03-15', '7890123456', '560001', 'Lab3', 'Positive', 'Engaging communication style', 'Strong analytical skills', 'Exceptional performance', 'Accepted', 1),('Zara', '', 'Sharma', 'zara.sharma@email.com', 'Mumbai', 'MCA', '2023-04-20', '9876543210', '400001', 'Lab1', 'Positive', 'Effective communicator', 'Business acumen', 'Impressive overall profile', 'Pending', 1),('Vir', 'Singh', 'Yadav', 'vir.yadav@email.com', 'Delhi', 'B.Tech', '2023-05-25', '8765432109', '110001', 'Lab2', 'Positive', 'Average communication', 'need to clear basic with visualization ', 'Poor', 'Rejected', 2),('Anvi', 'Kumar', 'Sharma', 'anvi.sharma@email.com', 'Bangalore', 'B.E', '2023-06-30', '7890123456', '560001', 'Lab3', 'Positive', 'Clear and effective communication', 'Solid technical skills', 'Outstanding performance', 'Accepted', 2),('Aryan', 'Raj', 'Patel', 'aryan.patel@email.com', 'Mumbai', 'B.E', '2023-07-04', '9876543210', '400001', 'Lab1', 'Positive', 'Ok communicator', 'Strong technical skills', 'Ok', 'Accepted', 3),('Arya', '', 'Patel', 'aryan.patel@email.com', 'Mumbai', 'MCA', '2023-07-05', '9776544210', '400002', 'Lab2', 'Positive', 'fine communicator', 'Not strong technical skills', 'Average', 'Rejected', 3);
+Query OK, 20 rows affected (0.02 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> select * from Mst_HiredCandidate;
++----+-----------+------------+----------+---------------------------+-----------+--------+------------+--------------+------------------+----------+----------+-----------------------------------+-----------------------------------------+----------------------------+----------+---------------------+-------------+
+| Id | FirstName | MiddleName | LastName | EmailId                   | HiredCity | Degree | HiredDate  | MobileNumber | PermanentPincode | HiredLab | Attitude | CommunicationRemark               | KnowledgeRemark                         | AggregateRemark            | Status   | CreatorStamp        | CreatorUser |
++----+-----------+------------+----------+---------------------------+-----------+--------+------------+--------------+------------------+----------+----------+-----------------------------------+-----------------------------------------+----------------------------+----------+---------------------+-------------+
+|  1 | Sushil    | Kumar      | Gupta    | sushilgupta123@email.com  | Bangalore | B.Tech | 2023-09-17 | 6205806083   | 400001           | Lab3     | Positive | Excellent communicator            | Strong technical skills                 | Top-tech candidate         | Accepted | 2023-12-11 13:49:43 |           1 |
+|  2 | Rakesh    | Kumar      | Pandey   | rkp65@email.com           | Delhi     | B.E    | 2023-02-10 | 8765432109   | 110001           | Lab2     | Positive | Great interpersonal skills        | Deep technical knowledge                | Exceptional performance    | Accepted | 2023-12-11 13:49:43 |           2 |
+|  3 | Amit      | Kumar      | Verma    | amit.verma@email.com      | Bangalore | B.E    | 2023-03-15 | 7890123456   | 560001           | Lab3     | Positive | Effective communicator            | Solid technical expertise               | Outstanding profile        | Pending  | 2023-12-11 13:49:43 |           1 |
+|  4 | Bikesh    |            | Yadav    | bikesh.yadav@email.com    | Mumbai    | B.Tech | 2023-04-20 | 9876543210   | 400001           | Lab1     | Positive | Clear and concise communication   | In-depth knowledge                      | Impressive candidate       | Pending  | 2023-12-11 13:49:43 |           1 |
+|  5 | Arjun     | Kumar      | Shukla   | arjun.shukla@email.com    | Delhi     | B.E    | 2023-05-25 | 8765432109   | 110001           | Lab2     | Positive | Excellent communication skills    | Extensive research expertise            | Top-tier candidate         | Accepted | 2023-12-11 13:49:43 |           2 |
+|  6 | Sumesh    | Kumar      | Maurya   | sumesh.maurya@email.com   | Bangalore | B.Sc   | 2023-06-30 | 7890123456   | 560001           | Lab3     | Positive | Engaging communication style      | Strong analytical skills                | Exceptional performance    | Pending  | 2023-12-11 13:49:43 |           3 |
+|  7 | Aditya    |            | Sharma   | aditya.sharma@email.com   | Mumbai    | B.E    | 2023-07-05 | 9876543210   | 400001           | Lab1     | Positive | Effective communicator            | Technically Good                        | Impressive overall profile | Pending  | 2023-12-11 13:49:43 |           3 |
+|  8 | Swapnil   | Shivaji    | Patil    | swapnil.patil@email.com   | Delhi     | B.Tech | 2023-08-10 | 8765432109   | 110001           | Lab2     | Positive | Good interpersonal skills         | Revise Technical Knowledge              | Average                    | Rejected | 2023-12-11 13:49:43 |           2 |
+|  9 | Sanket    |            | Jadhaw   | sanket.jadhaw@email.com   | Bangalore | B.Tech | 2023-09-15 | 7890123456   | 560001           | Lab3     | Positive | Clear and effective communication | Solid technical skills                  | Outstanding performance    | Accepted | 2023-12-11 13:49:43 |           1 |
+| 10 | Ishita    | Raj        | Patel    | ishita.patel@email.com    | Mumbai    | B.E    | 2023-10-20 | 9876543210   | 400001           | Lab1     | Positive | Excellent communicator            | Strong technical skills                 | Top-notch candidate        | Pending  | 2023-12-11 13:49:43 |           1 |
+| 11 | Vihan     | Singh      | Sharma   | vihan.sharma@email.com    | Delhi     | B.Tech | 2023-11-25 | 8765432109   | 110001           | Lab2     | Positive | Great interpersonal skills        | need to revise deep technical knowledge | Ok                         | Pending  | 2023-12-11 13:49:43 |           1 |
+| 12 | Aisha     |            | Verma    | aisha.verma@email.com     | Bangalore | B.Tech | 2023-02-26 | 7890123456   | 560001           | Lab3     | Positive | Effective communicator            | Solid technical expertise               | Fine                       | Accepted | 2023-12-11 13:49:43 |           2 |
+| 13 | Aditya    | Kumar      | sharma   | sharma.aditya@email.com   | Mumbai    | B.E    | 2023-01-05 | 9876543210   | 400001           | Lab1     | Positive | lagging in communication          | not know basics technical               | Average                    | Pending  | 2023-12-11 13:49:43 |           3 |
+| 14 | Aaradhya  | Singh      | Shukla   | aaradhya.shukla@email.com | Delhi     | B.Tech | 2023-02-10 | 8765432109   | 110001           | Lab2     | Positive | Good communication skills         | Not know basics concept                 | Average                    | Rejected | 2023-12-11 13:49:43 |           1 |
+| 15 | Reyansh   | Kumar      | Pandey   | reyansh.pandey@email.com  | Bangalore | B.Sc   | 2023-03-15 | 7890123456   | 560001           | Lab3     | Positive | Engaging communication style      | Strong analytical skills                | Exceptional performance    | Accepted | 2023-12-11 13:49:43 |           1 |
+| 16 | Zara      |            | Sharma   | zara.sharma@email.com     | Mumbai    | MCA    | 2023-04-20 | 9876543210   | 400001           | Lab1     | Positive | Effective communicator            | Business acumen                         | Impressive overall profile | Pending  | 2023-12-11 13:49:43 |           1 |
+| 17 | Vir       | Singh      | Yadav    | vir.yadav@email.com       | Delhi     | B.Tech | 2023-05-25 | 8765432109   | 110001           | Lab2     | Positive | Average communication             | need to clear basic with visualization  | Poor                       | Rejected | 2023-12-11 13:49:43 |           2 |
+| 18 | Anvi      | Kumar      | Sharma   | anvi.sharma@email.com     | Bangalore | B.E    | 2023-06-30 | 7890123456   | 560001           | Lab3     | Positive | Clear and effective communication | Solid technical skills                  | Outstanding performance    | Accepted | 2023-12-11 13:49:43 |           2 |
+| 19 | Aryan     | Raj        | Patel    | aryan.patel@email.com     | Mumbai    | B.E    | 2023-07-04 | 9876543210   | 400001           | Lab1     | Positive | Ok communicator                   | Strong technical skills                 | Ok                         | Accepted | 2023-12-11 13:49:43 |           3 |
+| 20 | Arya      |            | Patel    | aryan.patel@email.com     | Mumbai    | MCA    | 2023-07-05 | 9776544210   | 400002           | Lab2     | Positive | fine communicator                 | Not strong technical skills             | Average                    | Rejected | 2023-12-11 13:49:43 |           3 |
++----+-----------+------------+----------+---------------------------+-----------+--------+------------+--------------+------------------+----------+----------+-----------------------------------+-----------------------------------------+----------------------------+----------+---------------------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Mst_Company (    Id INT AUTO_INCREMENT PRIMARY KEY,    Name VARCHAR(20),    Address VARCHAR(100),    Location VARCHAR(100),    Status VARCHAR(20),    CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    CreatorUser INT);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc Mst_Company;
++--------------+--------------+------+-----+-------------------+-------------------+
+| Field        | Type         | Null | Key | Default           | Extra             |
++--------------+--------------+------+-----+-------------------+-------------------+
+| Id           | int          | NO   | PRI | NULL              | auto_increment    |
+| Name         | varchar(20)  | YES  |     | NULL              |                   |
+| Address      | varchar(100) | YES  |     | NULL              |                   |
+| Location     | varchar(100) | YES  |     | NULL              |                   |
+| Status       | varchar(20)  | YES  |     | NULL              |                   |
+| CreatorStamp | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser  | int          | YES  |     | NULL              |                   |
++--------------+--------------+------+-----+-------------------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO Mst_Company (Name, Address, Location, Status, CreatorUser) VALUES('IBM', '123 IBM Street', 'New York', 'Active', 1),('Hewlett Packard', '456 HPE Avenue', 'San Francisco', 'Active', 2),('Cisco Systems', '234 Cisco Lane', 'San Jose', 'Active', 2),('Intel Corporation', '567 Intel Tower', 'Santa Clara', 'Active', 3),('Adobe Inc.', '890 Adobe Way', 'San Jose', 'Active', 1),('Facebook', '123 Facebook Boulevard', 'Menlo Park', 'Active', 2),('Twitter', '456 Twitter Lane', 'San Francisco', 'Active', 3),('LinkedIn', '789 LinkedIn Drive', 'Sunnyvale', 'Active', 1),('Apple Inc.', '234 Apple Avenue', 'Cupertino', 'Active', 2),('QualityKiosk', 'Mahape, Navi Mumbai', 'Mumbai', 'Active', 1),('Iris', 'Vashi', 'Navi Mumbai', 'Active', 2),('Locobuzz','Andheri', 'Mumbai', 'Active', 1),('Turtol-Mint', 'Navi Mumbai', 'Mumbai', 'Active', 2),('Edelwise', '14th Floor, Express Towers', 'Mumbai', 'Active', 1),('Tata 1mg', '6X24+FC7, Rajiv Gandhi Nagar, Ambica Nagar', 'Thane', 'Active', 3);
+Query OK, 15 rows affected (0.01 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> select * from Mst_Company;
++----+-------------------+--------------------------------------------+---------------+--------+---------------------+-------------+
+| Id | Name              | Address                                    | Location      | Status | CreatorStamp        | CreatorUser |
++----+-------------------+--------------------------------------------+---------------+--------+---------------------+-------------+
+|  1 | IBM               | 123 IBM Street                             | New York      | Active | 2023-12-11 13:51:37 |           1 |
+|  2 | Hewlett Packard   | 456 HPE Avenue                             | San Francisco | Active | 2023-12-11 13:51:37 |           2 |
+|  3 | Cisco Systems     | 234 Cisco Lane                             | San Jose      | Active | 2023-12-11 13:51:37 |           2 |
+|  4 | Intel Corporation | 567 Intel Tower                            | Santa Clara   | Active | 2023-12-11 13:51:37 |           3 |
+|  5 | Adobe Inc.        | 890 Adobe Way                              | San Jose      | Active | 2023-12-11 13:51:37 |           1 |
+|  6 | Facebook          | 123 Facebook Boulevard                     | Menlo Park    | Active | 2023-12-11 13:51:37 |           2 |
+|  7 | Twitter           | 456 Twitter Lane                           | San Francisco | Active | 2023-12-11 13:51:37 |           3 |
+|  8 | LinkedIn          | 789 LinkedIn Drive                         | Sunnyvale     | Active | 2023-12-11 13:51:37 |           1 |
+|  9 | Apple Inc.        | 234 Apple Avenue                           | Cupertino     | Active | 2023-12-11 13:51:37 |           2 |
+| 10 | QualityKiosk      | Mahape, Navi Mumbai                        | Mumbai        | Active | 2023-12-11 13:51:37 |           1 |
+| 11 | Iris              | Vashi                                      | Navi Mumbai   | Active | 2023-12-11 13:51:37 |           2 |
+| 12 | Locobuzz          | Andheri                                    | Mumbai        | Active | 2023-12-11 13:51:37 |           1 |
+| 13 | Turtol-Mint       | Navi Mumbai                                | Mumbai        | Active | 2023-12-11 13:51:37 |           2 |
+| 14 | Edelwise          | 14th Floor, Express Towers                 | Mumbai        | Active | 2023-12-11 13:51:37 |           1 |
+| 15 | Tata 1mg          | 6X24+FC7, Rajiv Gandhi Nagar, Ambica Nagar | Thane         | Active | 2023-12-11 13:51:37 |           3 |
++----+-------------------+--------------------------------------------+---------------+--------+---------------------+-------------+
+15 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Mst_AppParameters (    Id INT AUTO_INCREMENT PRIMARY KEY,    KeyType VARCHAR(50),    KeyValue VARCHAR(100),    KeyText TEXT,    CurStatus VARCHAR(50),    LastUpdateUser INT,     LastUpdateStamp TIMESTAMP,    CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    CreatorUser INT,    SeqNum INT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc Mst_AppParameters;
++-----------------+--------------+------+-----+-------------------+-------------------+
+| Field           | Type         | Null | Key | Default           | Extra             |
++-----------------+--------------+------+-----+-------------------+-------------------+
+| Id              | int          | NO   | PRI | NULL              | auto_increment    |
+| KeyType         | varchar(50)  | YES  |     | NULL              |                   |
+| KeyValue        | varchar(100) | YES  |     | NULL              |                   |
+| KeyText         | text         | YES  |     | NULL              |                   |
+| CurStatus       | varchar(50)  | YES  |     | NULL              |                   |
+| LastUpdateUser  | int          | YES  |     | NULL              |                   |
+| LastUpdateStamp | timestamp    | YES  |     | NULL              |                   |
+| CreatorStamp    | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser     | int          | YES  |     | NULL              |                   |
+| SeqNum          | int          | YES  |     | NULL              |                   |
++-----------------+--------------+------+-----+-------------------+-------------------+
+10 rows in set (0.00 sec)
+
+mysql> INSERT INTO Mst_AppParameters (KeyType, KeyValue, KeyText, CurStatus, SeqNum)VALUES ('DOC_STATUS', 'PND', 'Pending', 'ACTV', 1),('DOC_STATUS', 'RCEVD', 'Received', 'ACTV', 2),('CUR_STATUS', 'ACTV', 'Active', 'ACTV', 1),('CUR_STATUS', 'IACTV', 'Inactive', 'ACTV', 1),('BATCH_STATUS', 'INPROCESS', 'In Process', 'ACTV', 1),('BATCH_STATUS', 'HOLD', 'Hold', 'ACTV', 2),('BATCH_STATUS', 'COMPL', 'Completed', 'ACTV', 3);
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from Mst_AppParameters;
++----+--------------+-----------+------------+-----------+----------------+-----------------+---------------------+-------------+--------+
+| Id | KeyType      | KeyValue  | KeyText    | CurStatus | LastUpdateUser | LastUpdateStamp | CreatorStamp        | CreatorUser | SeqNum |
++----+--------------+-----------+------------+-----------+----------------+-----------------+---------------------+-------------+--------+
+|  1 | DOC_STATUS   | PND       | Pending    | ACTV      |           NULL | NULL            | 2023-12-11 13:53:06 |        NULL |      1 |
+|  2 | DOC_STATUS   | RCEVD     | Received   | ACTV      |           NULL | NULL            | 2023-12-11 13:53:06 |        NULL |      2 |
+|  3 | CUR_STATUS   | ACTV      | Active     | ACTV      |           NULL | NULL            | 2023-12-11 13:53:06 |        NULL |      1 |
+|  4 | CUR_STATUS   | IACTV     | Inactive   | ACTV      |           NULL | NULL            | 2023-12-11 13:53:06 |        NULL |      1 |
+|  5 | BATCH_STATUS | INPROCESS | In Process | ACTV      |           NULL | NULL            | 2023-12-11 13:53:06 |        NULL |      1 |
+|  6 | BATCH_STATUS | HOLD      | Hold       | ACTV      |           NULL | NULL            | 2023-12-11 13:53:06 |        NULL |      2 |
+|  7 | BATCH_STATUS | COMPL     | Completed  | ACTV      |           NULL | NULL            | 2023-12-11 13:53:06 |        NULL |      3 |
++----+--------------+-----------+------------+-----------+----------------+-----------------+---------------------+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Mst_TechStack (    Id INT AUTO_INCREMENT PRIMARY KEY,    TechName VARCHAR(50),    ImagePath VARCHAR(100),    Framework VARCHAR(20),    CurStatus VARCHAR(20),    CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    CreatorUser INT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc Mst_TechStack;
++--------------+--------------+------+-----+-------------------+-------------------+
+| Field        | Type         | Null | Key | Default           | Extra             |
++--------------+--------------+------+-----+-------------------+-------------------+
+| Id           | int          | NO   | PRI | NULL              | auto_increment    |
+| TechName     | varchar(50)  | YES  |     | NULL              |                   |
+| ImagePath    | varchar(100) | YES  |     | NULL              |                   |
+| Framework    | varchar(20)  | YES  |     | NULL              |                   |
+| CurStatus    | varchar(20)  | YES  |     | NULL              |                   |
+| CreatorStamp | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser  | int          | YES  |     | NULL              |                   |
++--------------+--------------+------+-----+-------------------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO Mst_TechStack (TechName, ImagePath, Framework, CurStatus, CreatorUser) VALUES('Java', '/images/java_logo.png', 'Spring Boot', 'Active', 1),('Mobile', '/images/mobile_logo.png', 'React Native', 'Active', 2),('PHP', '/images/php_logo.png', 'Laravel', 'Active', 3),('Python', '/images/python_logo.png', 'Django', 'Active', 1),('JavaScript', '/images/javascript_logo.png', 'React', 'Active', 2),('Database', '/images/database_logo.png', 'MySQL', 'Active', 3),('Scripting', '/images/scripting_logo.png', 'Python Scripting', 'Active', 1),('Programming Language', '/images/programming_logo.png', 'C++', 'Active', 2);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Mst_TechStack;
++----+----------------------+------------------------------+------------------+-----------+---------------------+-------------+
+| Id | TechName             | ImagePath                    | Framework        | CurStatus | CreatorStamp        | CreatorUser |
++----+----------------------+------------------------------+------------------+-----------+---------------------+-------------+
+|  1 | Java                 | /images/java_logo.png        | Spring Boot      | Active    | 2023-12-11 13:54:41 |           1 |
+|  2 | Mobile               | /images/mobile_logo.png      | React Native     | Active    | 2023-12-11 13:54:41 |           2 |
+|  3 | PHP                  | /images/php_logo.png         | Laravel          | Active    | 2023-12-11 13:54:41 |           3 |
+|  4 | Python               | /images/python_logo.png      | Django           | Active    | 2023-12-11 13:54:41 |           1 |
+|  5 | JavaScript           | /images/javascript_logo.png  | React            | Active    | 2023-12-11 13:54:41 |           2 |
+|  6 | Database             | /images/database_logo.png    | MySQL            | Active    | 2023-12-11 13:54:41 |           3 |
+|  7 | Scripting            | /images/scripting_logo.png   | Python Scripting | Active    | 2023-12-11 13:54:41 |           1 |
+|  8 | Programming Language | /images/programming_logo.png | C++              | Active    | 2023-12-11 13:54:41 |           2 |
++----+----------------------+------------------------------+------------------+-----------+---------------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Mst_TechType (    Id INT AUTO_INCREMENT PRIMARY KEY,    TypeName VARCHAR(20),    CurStatus VARCHAR(20),    CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    CreatorUser INT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc Mst_TechType;
++--------------+-------------+------+-----+-------------------+-------------------+
+| Field        | Type        | Null | Key | Default           | Extra             |
++--------------+-------------+------+-----+-------------------+-------------------+
+| Id           | int         | NO   | PRI | NULL              | auto_increment    |
+| TypeName     | varchar(20) | YES  |     | NULL              |                   |
+| CurStatus    | varchar(20) | YES  |     | NULL              |                   |
+| CreatorStamp | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser  | int         | YES  |     | NULL              |                   |
++--------------+-------------+------+-----+-------------------+-------------------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO Mst_TechType (TypeName, CurStatus, CreatorUser) VALUES('FullStack', 'Active', 1),('FrontEnd', 'Active', 2),('BackEnd', 'Active', 3),('Mobile', 'Active', 1),('Database', 'Active', 2),('Scripting', 'Active', 3),('Programming Language', 'Active', 1);
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * from Mst_TechType;
++----+----------------------+-----------+---------------------+-------------+
+| Id | TypeName             | CurStatus | CreatorStamp        | CreatorUser |
++----+----------------------+-----------+---------------------+-------------+
+|  1 | FullStack            | Active    | 2023-12-11 13:55:55 |           1 |
+|  2 | FrontEnd             | Active    | 2023-12-11 13:55:55 |           2 |
+|  3 | BackEnd              | Active    | 2023-12-11 13:55:55 |           3 |
+|  4 | Mobile               | Active    | 2023-12-11 13:55:55 |           1 |
+|  5 | Database             | Active    | 2023-12-11 13:55:55 |           2 |
+|  6 | Scripting            | Active    | 2023-12-11 13:55:55 |           3 |
+|  7 | Programming Language | Active    | 2023-12-11 13:55:55 |           1 |
++----+----------------------+-----------+---------------------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Mst_Lab (    Id INT AUTO_INCREMENT PRIMARY KEY,    Name VARCHAR(20),    Location VARCHAR(20),    Address VARCHAR(100),    Status VARCHAR(20),    CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    CreatorUser INT);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc Mst_Lab;
++--------------+--------------+------+-----+-------------------+-------------------+
+| Field        | Type         | Null | Key | Default           | Extra             |
++--------------+--------------+------+-----+-------------------+-------------------+
+| Id           | int          | NO   | PRI | NULL              | auto_increment    |
+| Name         | varchar(20)  | YES  |     | NULL              |                   |
+| Location     | varchar(20)  | YES  |     | NULL              |                   |
+| Address      | varchar(100) | YES  |     | NULL              |                   |
+| Status       | varchar(20)  | YES  |     | NULL              |                   |
+| CreatorStamp | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser  | int          | YES  |     | NULL              |                   |
++--------------+--------------+------+-----+-------------------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO Mst_Lab (Name, Location, Address, Status, CreatorUser) VALUES('Lab1', 'Mumbai', 'Malhotra Chambers, Deonar, Govandi East, Mumbai - 400088', 'Active', 1),('Lab2', 'Pune', 'Pune, Maharashtra', 'Active', 2),('Lab3', 'Bangalore', '5, 14th A Main Rd, Sector 4, HSR Layout, Bengaluru', 'Active', 3);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Mst_Lab;
++----+------+-----------+----------------------------------------------------------+--------+---------------------+-------------+
+| Id | Name | Location  | Address                                                  | Status | CreatorStamp        | CreatorUser |
++----+------+-----------+----------------------------------------------------------+--------+---------------------+-------------+
+|  1 | Lab1 | Mumbai    | Malhotra Chambers, Deonar, Govandi East, Mumbai - 400088 | Active | 2023-12-11 13:56:47 |           1 |
+|  2 | Lab2 | Pune      | Pune, Maharashtra                                        | Active | 2023-12-11 13:56:47 |           2 |
+|  3 | Lab3 | Bangalore | 5, 14th A Main Rd, Sector 4, HSR Layout, Bengaluru       | Active | 2023-12-11 13:56:47 |           3 |
++----+------+-----------+----------------------------------------------------------+--------+---------------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE FellowshipCandidate (    Id INT,    CandidateId VARCHAR(20) NOT NULL PRIMARY KEY,    FirstName VARCHAR(20) NOT NULL,    MiddleName VARCHAR(20),    LastName VARCHAR(20) NOT NULL,    EmailId VARCHAR(30) NOT NULL,    HiredCity VARCHAR(20),     Degree VARCHAR(10),    HiredDate DATE,    MobileNumber VARCHAR(20),    PermanentPincode VARCHAR(6),    HiredLab VARCHAR(20),    Attitude VARCHAR(20),    CommunicationRemark VARCHAR(100),    KnowledgeRemark VARCHAR(100),    AggregateRemark VARCHAR(100),    CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    CreatorUser INT,    BirthDate DATE,    IsBirthDateVerified BOOLEAN,    ParentName VARCHAR(20),    ParentOccupation VARCHAR(20),    ParentsMobileNumber VARCHAR(20),    ParentsAnnualSalary DECIMAL(10, 2),     LocalAddress VARCHAR(100),    PermanentAddress VARCHAR(100),    PhotoPath VARCHAR(100),    JoiningDate DATE,    CandidateStatus VARCHAR(50),    PersonalInformation TEXT,    BankInformation TEXT,    EducationalInformation TEXT,    DocumentStatus VARCHAR(20),    Remark TEXT,    FOREIGN KEY (Id) REFERENCES Mst_HiredCandidate(Id));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc FellowshipCandidate;
++------------------------+---------------+------+-----+-------------------+-------------------+
+| Field                  | Type          | Null | Key | Default           | Extra             |
++------------------------+---------------+------+-----+-------------------+-------------------+
+| Id                     | int           | YES  | MUL | NULL              |                   |
+| CandidateId            | varchar(20)   | NO   | PRI | NULL              |                   |
+| FirstName              | varchar(20)   | NO   |     | NULL              |                   |
+| MiddleName             | varchar(20)   | YES  |     | NULL              |                   |
+| LastName               | varchar(20)   | NO   |     | NULL              |                   |
+| EmailId                | varchar(30)   | NO   |     | NULL              |                   |
+| HiredCity              | varchar(20)   | YES  |     | NULL              |                   |
+| Degree                 | varchar(10)   | YES  |     | NULL              |                   |
+| HiredDate              | date          | YES  |     | NULL              |                   |
+| MobileNumber           | varchar(20)   | YES  |     | NULL              |                   |
+| PermanentPincode       | varchar(6)    | YES  |     | NULL              |                   |
+| HiredLab               | varchar(20)   | YES  |     | NULL              |                   |
+| Attitude               | varchar(20)   | YES  |     | NULL              |                   |
+| CommunicationRemark    | varchar(100)  | YES  |     | NULL              |                   |
+| KnowledgeRemark        | varchar(100)  | YES  |     | NULL              |                   |
+| AggregateRemark        | varchar(100)  | YES  |     | NULL              |                   |
+| CreatorStamp           | timestamp     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser            | int           | YES  |     | NULL              |                   |
+| BirthDate              | date          | YES  |     | NULL              |                   |
+| IsBirthDateVerified    | tinyint(1)    | YES  |     | NULL              |                   |
+| ParentName             | varchar(20)   | YES  |     | NULL              |                   |
+| ParentOccupation       | varchar(20)   | YES  |     | NULL              |                   |
+| ParentsMobileNumber    | varchar(20)   | YES  |     | NULL              |                   |
+| ParentsAnnualSalary    | decimal(10,2) | YES  |     | NULL              |                   |
+| LocalAddress           | varchar(100)  | YES  |     | NULL              |                   |
+| PermanentAddress       | varchar(100)  | YES  |     | NULL              |                   |
+| PhotoPath              | varchar(100)  | YES  |     | NULL              |                   |
+| JoiningDate            | date          | YES  |     | NULL              |                   |
+| CandidateStatus        | varchar(50)   | YES  |     | NULL              |                   |
+| PersonalInformation    | text          | YES  |     | NULL              |                   |
+| BankInformation        | text          | YES  |     | NULL              |                   |
+| EducationalInformation | text          | YES  |     | NULL              |                   |
+| DocumentStatus         | varchar(20)   | YES  |     | NULL              |                   |
+| Remark                 | text          | YES  |     | NULL              |                   |
++------------------------+---------------+------+-----+-------------------+-------------------+
+34 rows in set (0.00 sec)
+
+mysql> INSERT INTO FellowshipCandidate (
+    ->     Id,
+    ->     CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     CreatorStamp,
+    ->     CreatorUser,
+    ->     BirthDate,
+    ->     IsBirthDateVerified,
+    ->     ParentName,
+    ->     ParentOccupation,
+    ->     ParentsMobileNumber,
+    ->     ParentsAnnualSalary,
+    ->     LocalAddress,
+    ->     PermanentAddress,
+    ->     PhotoPath,
+    ->     JoiningDate,
+    ->     CandidateStatus,
+    ->     PersonalInformation,
+    ->     BankInformation,
+    ->     EducationalInformation,
+    ->     DocumentStatus,
+    ->     Remark
+    -> )
+    -> SELECT
+    ->     Id,
+    ->     CONCAT('CandidateId', LPAD(id, 5, '0')) AS CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     NOW() AS CreatorStamp,
+    ->      1 AS CreatorUser,
+    ->     '2023-09-09' AS BirthDate,
+    ->      true AS IsBirthDateVerified,
+    ->     'Rajkumar' AS ParentName,
+    ->     'Service' AS ParentOccupation,
+    ->     '8452804004' AS ParentsMobileNumber,
+    ->     200000 AS ParentsAnnualSalary,
+    ->     'Matunga-16' AS LocalAddress,
+    ->     'Dadar-28' AS PermanentAddress,
+    ->     'No' AS PhotoPath,
+    ->     HiredDate AS JoiningDate,
+    ->     'Active' AS CandidateStatus,
+    ->     'Na' AS PersonalInformation,
+    ->     'Bank of Maharashtra' AS BankInformation,
+    ->     'Not done' AS EducationalInformation,
+    ->     'Done' AS DocumentStatus,
+    ->     'Good' AS Remark
+    -> FROM Mst_HiredCandidate
+    -> WHERE Status = 'Accepted' AND id = 1;
+Query OK, 1 row affected (0.02 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> 
+mysql> INSERT INTO FellowshipCandidate (
+    ->     Id,
+    ->     CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     CreatorStamp,
+    ->     CreatorUser,
+    ->     BirthDate,
+    ->     IsBirthDateVerified,
+    ->     ParentName,
+    ->     ParentOccupation,
+    ->     ParentsMobileNumber,
+    ->     ParentsAnnualSalary,
+    ->     LocalAddress,
+    ->     PermanentAddress,
+    ->     PhotoPath,
+    ->     JoiningDate,
+    ->     CandidateStatus,
+    ->     PersonalInformation,
+    ->     BankInformation,
+    ->     EducationalInformation,
+    ->     DocumentStatus,
+    ->     Remark
+    -> )
+    -> SELECT
+    ->     Id,
+    ->     CONCAT('CandidateId', LPAD(id, 5, '0')) AS CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser,
+    ->     '2023-09-10' AS BirthDate,
+    ->     true AS IsBirthDateVerified,
+    ->     'Sarita' AS ParentName,
+    ->     'Engineer' AS ParentOccupation,
+    ->     '9452344005' AS ParentsMobileNumber,
+    ->     250000 AS ParentsAnnualSalary,
+    ->     'Vikhroli-18' AS LocalAddress,
+    ->     'Powai-22' AS PermanentAddress,
+    ->     'No' AS PhotoPath,
+    ->     HiredDate AS JoiningDate,
+    ->     'Active' AS CandidateStatus,
+    ->     'I am good in coding' AS PersonalInformation,
+    ->     'HDFC Bank' AS BankInformation,
+    ->     'Done' AS EducationalInformation,
+    ->     'Done' AS DocumentStatus,
+    ->     'Excellent' AS Remark
+    -> FROM Mst_HiredCandidate
+    -> WHERE Status = 'Accepted' AND id = 2;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO FellowshipCandidate (
+    ->     Id,
+    ->     CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     CreatorStamp,
+    ->     CreatorUser,
+    ->     BirthDate,
+    ->     IsBirthDateVerified,
+    ->     ParentName,
+    ->     ParentOccupation,
+    ->     ParentsMobileNumber,
+    ->     ParentsAnnualSalary,
+    ->     LocalAddress,
+    ->     PermanentAddress,
+    ->     PhotoPath,
+    ->     JoiningDate,
+    ->     CandidateStatus,
+    ->     PersonalInformation,
+    ->     BankInformation,
+    ->     EducationalInformation,
+    ->     DocumentStatus,
+    ->     Remark
+    -> )
+    -> SELECT
+    ->     Id,
+    ->     CONCAT('CandidateId', LPAD(id, 5, '0')) AS CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser,
+    ->     '2001-01-15' AS BirthDate,
+    ->     true AS IsBirthDateVerified,
+    ->     'Mr.' AS ParentName,
+    ->     'Professor' AS ParentOccupation,
+    ->     '9876543210' AS ParentsMobileNumber,
+    ->     150000 AS ParentsAnnualSalary,
+    ->     '123 Main Street' AS LocalAddress,
+    ->     '456 delhi 3rd cross' AS PermanentAddress,
+    ->     '/images/in.jpg' AS PhotoPath,
+    ->     HiredDate AS JoiningDate,
+    ->     'Active' AS CandidateStatus,
+    ->     'I am good in singing' AS PersonalInformation,
+    ->     'ICICI Bank' AS BankInformation,
+    ->     'B.E' AS EducationalInformation,
+    ->     'Received' AS DocumentStatus,
+    ->     'Good' AS Remark
+    -> FROM Mst_HiredCandidate
+    -> WHERE Status = 'Accepted' AND id = 5;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO FellowshipCandidate (
+    ->     Id,
+    ->     CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     CreatorStamp,
+    ->     CreatorUser,
+    ->     BirthDate,
+    ->     IsBirthDateVerified,
+    ->     ParentName,
+    ->     ParentOccupation,
+    ->     ParentsMobileNumber,
+    ->     ParentsAnnualSalary,
+    ->     LocalAddress,
+    ->     PermanentAddress,
+    ->     PhotoPath,
+    ->     JoiningDate,
+    ->     CandidateStatus,
+    ->     PersonalInformation,
+    ->     BankInformation,
+    ->     EducationalInformation,
+    ->     DocumentStatus,
+    ->     Remark
+    -> )
+    -> SELECT
+    ->     Id,
+    ->     CONCAT('CandidateId', LPAD(id, 5, '0')) AS CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser,
+    ->     '2000-05-20' AS BirthDate,
+    ->     true AS IsBirthDateVerified,
+    ->     'Mr Jadhaw' AS ParentName,
+    ->     'Engineer' AS ParentOccupation,
+    ->     '9876543221' AS ParentsMobileNumber,
+    ->     180000 AS ParentsAnnualSalary,
+    ->     '789 Main Street' AS LocalAddress,
+    ->     '101 pune 4th cross' AS PermanentAddress,
+    ->     '/images/mr.jpg' AS PhotoPath,
+    ->     HiredDate AS JoiningDate,
+    ->     'Active' AS CandidateStatus,
+    ->     'I am good in coding' AS PersonalInformation,
+    ->     'HDFC' AS BankInformation,
+    ->     'MCA' AS EducationalInformation,
+    ->     'Received' AS DocumentStatus,
+    ->     'Excellent' AS Remark
+    -> FROM Mst_HiredCandidate
+    -> WHERE Status = 'Accepted' AND id = 9;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO FellowshipCandidate (
+    ->     Id,
+    ->     CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     CreatorStamp,
+    ->     CreatorUser,
+    ->     BirthDate,
+    ->     IsBirthDateVerified,
+    ->     ParentName,
+    ->     ParentOccupation,
+    ->     ParentsMobileNumber,
+    ->     ParentsAnnualSalary,
+    ->     LocalAddress,
+    ->     PermanentAddress,
+    ->     PhotoPath,
+    ->     JoiningDate,
+    ->     CandidateStatus,
+    ->     PersonalInformation,
+    ->     BankInformation,
+    ->     EducationalInformation,
+    ->     DocumentStatus,
+    ->     Remark
+    -> )
+    -> SELECT
+    ->     Id,
+    ->     CONCAT('CandidateId', LPAD(id, 5, '0')) AS CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser,
+    ->     '2001-08-12' AS BirthDate,
+    ->     true AS IsBirthDateVerified,
+    ->     'Mr sukesh' AS ParentName,
+    ->     'Doctor' AS ParentOccupation,
+    ->     '9876543222' AS ParentsMobileNumber,
+    ->     200000 AS ParentsAnnualSalary,
+    ->     '4th cross BTM Layout' AS LocalAddress,
+    ->     '789 Bangalore' AS PermanentAddress,
+    ->     '/images/mr.jpg' AS PhotoPath,
+    ->     HiredDate AS JoiningDate,
+    ->     'Active' AS CandidateStatus,
+    ->     'I am good in coding' AS PersonalInformation,
+    ->     'HDFC' AS BankInformation,
+    ->     'DIPLOMA' AS EducationalInformation,
+    ->     'Received' AS DocumentStatus,
+    ->     'Excellent' AS Remark
+    -> FROM Mst_HiredCandidate
+    -> WHERE Status = 'Accepted' AND id = 12;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO FellowshipCandidate (
+    ->     Id,
+    ->     CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     CreatorStamp,
+    ->     CreatorUser,
+    ->     BirthDate,
+    ->     IsBirthDateVerified,
+    ->     ParentName,
+    ->     ParentOccupation,
+    ->     ParentsMobileNumber,
+    ->     ParentsAnnualSalary,
+    ->     LocalAddress,
+    ->     PermanentAddress,
+    ->     PhotoPath,
+    ->     JoiningDate,
+    ->     CandidateStatus,
+    ->     PersonalInformation,
+    ->     BankInformation,
+    ->     EducationalInformation,
+    ->     DocumentStatus,
+    ->     Remark
+    -> )
+    -> SELECT
+    ->     Id,
+    ->     CONCAT('CandidateId', LPAD(id, 5, '0')) AS CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser,
+    ->     '2000-12-01' AS BirthDate,
+    ->     true AS IsBirthDateVerified,
+    ->     'Mr singh' AS ParentName,
+    ->     'Engineer' AS ParentOccupation,
+    ->     '9876543223' AS ParentsMobileNumber,
+    ->     180000 AS ParentsAnnualSalary,
+    ->     '234 vashi' AS LocalAddress,
+    ->     '101 Patna 3rd cross' AS PermanentAddress,
+    ->     '/images/mr.jpg' AS PhotoPath,
+    ->     HiredDate AS JoiningDate,
+    ->     'Active' AS CandidateStatus,
+    ->     'I am good in coding' AS PersonalInformation,
+    ->     'HDFC' AS BankInformation,
+    ->     'DIPLOMA' AS EducationalInformation,
+    ->     'Received' AS DocumentStatus,
+    ->     'Good' AS Remark
+    -> FROM Mst_HiredCandidate
+    -> WHERE Status = 'Accepted' AND id = 15;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO FellowshipCandidate (
+    ->     Id,
+    ->     CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     CreatorStamp,
+    ->     CreatorUser,
+    ->     BirthDate,
+    ->     IsBirthDateVerified,
+    ->     ParentName,
+    ->     ParentOccupation,
+    ->     ParentsMobileNumber,
+    ->     ParentsAnnualSalary,
+    ->     LocalAddress,
+    ->     PermanentAddress,
+    ->     PhotoPath,
+    ->     JoiningDate,
+    ->     CandidateStatus,
+    ->     PersonalInformation,
+    ->     BankInformation,
+    ->     EducationalInformation,
+    ->     DocumentStatus,
+    ->     Remark
+    -> )
+    -> SELECT
+    ->     Id,
+    ->     CONCAT('CandidateId', LPAD(id, 5, '0')) AS CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser,
+    ->     '1999-11-18' AS BirthDate,
+    ->     true AS IsBirthDateVerified,
+    ->     'Mr yadav' AS ParentName,
+    ->     'Engineer' AS ParentOccupation,
+    ->     '9876543224' AS ParentsMobileNumber,
+    ->     200000 AS ParentsAnnualSalary,
+    ->     '456 vashi gaon' AS LocalAddress,
+    ->     '789 gurugram' AS PermanentAddress,
+    ->     '/images/mrs.jpg' AS PhotoPath,
+    ->     HiredDate AS JoiningDate,
+    ->     'Active' AS CandidateStatus,
+    ->     'I am good in coding' AS PersonalInformation,
+    ->     'HDFC' AS BankInformation,
+    ->     'B.Tech' AS EducationalInformation,
+    ->     'Received' AS DocumentStatus,
+    ->     'Excellent' AS Remark
+    -> FROM Mst_HiredCandidate
+    -> WHERE Status = 'Accepted' AND id = 18;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO FellowshipCandidate (
+    ->     Id,
+    ->     CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     CreatorStamp,
+    ->     CreatorUser,
+    ->     BirthDate,
+    ->     IsBirthDateVerified,
+    ->     ParentName,
+    ->     ParentOccupation,
+    ->     ParentsMobileNumber,
+    ->     ParentsAnnualSalary,
+    ->     LocalAddress,
+    ->     PermanentAddress,
+    ->     PhotoPath,
+    ->     JoiningDate,
+    ->     CandidateStatus,
+    ->     PersonalInformation,
+    ->     BankInformation,
+    ->     EducationalInformation,
+    ->     DocumentStatus,
+    ->     Remark
+    -> )
+    -> SELECT
+    ->     Id,
+    ->     CONCAT('CandidateId', LPAD(id, 5, '0')) AS CandidateId,
+    ->     FirstName,
+    ->     MiddleName,
+    ->     LastName,
+    ->     EmailId,
+    ->     HiredCity,
+    ->     Degree,
+    ->     HiredDate,
+    ->     MobileNumber,
+    ->     PermanentPincode,
+    ->     HiredLab,
+    ->     Attitude,
+    ->     CommunicationRemark,
+    ->     KnowledgeRemark,
+    ->     AggregateRemark,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser,
+    ->     '1998-10-05' AS BirthDate,
+    ->     true AS IsBirthDateVerified,
+    ->     'Mr Suresh' AS ParentName,
+    ->     'Advocate' AS ParentOccupation,
+    ->     '9876543225' AS ParentsMobileNumber,
+    ->     180000 AS ParentsAnnualSalary,
+    ->     '789 kolkata 4th road' AS LocalAddress,
+    ->     '101 kolkata' AS PermanentAddress,
+    ->     '/images/j.jpg' AS PhotoPath,
+    ->     HiredDate AS JoiningDate,
+    ->     'Active' AS CandidateStatus,
+    ->     'I am good in coding and singing' AS PersonalInformation,
+    ->     'SBI' AS BankInformation,
+    ->     'B.Tech' AS EducationalInformation,
+    ->     'Received' AS DocumentStatus,
+    ->     'Good' AS Remark
+    -> FROM Mst_HiredCandidate
+    -> WHERE Status = 'Accepted' AND id = 19;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> select * from FellowshipCandidate;
++------+------------------+-----------+------------+----------+--------------------------+-----------+--------+------------+--------------+------------------+----------+----------+-----------------------------------+------------------------------+-------------------------+---------------------+-------------+------------+---------------------+------------+------------------+---------------------+---------------------+----------------------+---------------------+-----------------+-------------+-----------------+---------------------------------+---------------------+------------------------+----------------+-----------+
+| Id   | CandidateId      | FirstName | MiddleName | LastName | EmailId                  | HiredCity | Degree | HiredDate  | MobileNumber | PermanentPincode | HiredLab | Attitude | CommunicationRemark               | KnowledgeRemark              | AggregateRemark         | CreatorStamp        | CreatorUser | BirthDate  | IsBirthDateVerified | ParentName | ParentOccupation | ParentsMobileNumber | ParentsAnnualSalary | LocalAddress         | PermanentAddress    | PhotoPath       | JoiningDate | CandidateStatus | PersonalInformation             | BankInformation     | EducationalInformation | DocumentStatus | Remark    |
++------+------------------+-----------+------------+----------+--------------------------+-----------+--------+------------+--------------+------------------+----------+----------+-----------------------------------+------------------------------+-------------------------+---------------------+-------------+------------+---------------------+------------+------------------+---------------------+---------------------+----------------------+---------------------+-----------------+-------------+-----------------+---------------------------------+---------------------+------------------------+----------------+-----------+
+|    1 | CandidateId00001 | Sushil    | Kumar      | Gupta    | sushilgupta123@email.com | Bangalore | B.Tech | 2023-09-17 | 6205806083   | 400001           | Lab3     | Positive | Excellent communicator            | Strong technical skills      | Top-tech candidate      | 2023-12-11 14:06:09 |           1 | 2023-09-09 |                   1 | Rajkumar   | Service          | 8452804004          |           200000.00 | Matunga-16           | Dadar-28            | No              | 2023-09-17  | Active          | Na                              | Bank of Maharashtra | Not done               | Done           | Good      |
+|    2 | CandidateId00002 | Rakesh    | Kumar      | Pandey   | rkp65@email.com          | Delhi     | B.E    | 2023-02-10 | 8765432109   | 110001           | Lab2     | Positive | Great interpersonal skills        | Deep technical knowledge     | Exceptional performance | 2023-12-11 14:06:09 |           1 | 2023-09-10 |                   1 | Sarita     | Engineer         | 9452344005          |           250000.00 | Vikhroli-18          | Powai-22            | No              | 2023-02-10  | Active          | I am good in coding             | HDFC Bank           | Done                   | Done           | Excellent |
+|    5 | CandidateId00005 | Arjun     | Kumar      | Shukla   | arjun.shukla@email.com   | Delhi     | B.E    | 2023-05-25 | 8765432109   | 110001           | Lab2     | Positive | Excellent communication skills    | Extensive research expertise | Top-tier candidate      | 2023-12-11 14:06:09 |           1 | 2001-01-15 |                   1 | Mr.        | Professor        | 9876543210          |           150000.00 | 123 Main Street      | 456 delhi 3rd cross | /images/in.jpg  | 2023-05-25  | Active          | I am good in singing            | ICICI Bank          | B.E                    | Received       | Good      |
+|    9 | CandidateId00009 | Sanket    |            | Jadhaw   | sanket.jadhaw@email.com  | Bangalore | B.Tech | 2023-09-15 | 7890123456   | 560001           | Lab3     | Positive | Clear and effective communication | Solid technical skills       | Outstanding performance | 2023-12-11 14:06:09 |           1 | 2000-05-20 |                   1 | Mr Jadhaw  | Engineer         | 9876543221          |           180000.00 | 789 Main Street      | 101 pune 4th cross  | /images/mr.jpg  | 2023-09-15  | Active          | I am good in coding             | HDFC                | MCA                    | Received       | Excellent |
+|   12 | CandidateId00012 | Aisha     |            | Verma    | aisha.verma@email.com    | Bangalore | B.Tech | 2023-02-26 | 7890123456   | 560001           | Lab3     | Positive | Effective communicator            | Solid technical expertise    | Fine                    | 2023-12-11 14:06:10 |           1 | 2001-08-12 |                   1 | Mr sukesh  | Doctor           | 9876543222          |           200000.00 | 4th cross BTM Layout | 789 Bangalore       | /images/mr.jpg  | 2023-02-26  | Active          | I am good in coding             | HDFC                | DIPLOMA                | Received       | Excellent |
+|   15 | CandidateId00015 | Reyansh   | Kumar      | Pandey   | reyansh.pandey@email.com | Bangalore | B.Sc   | 2023-03-15 | 7890123456   | 560001           | Lab3     | Positive | Engaging communication style      | Strong analytical skills     | Exceptional performance | 2023-12-11 14:06:10 |           1 | 2000-12-01 |                   1 | Mr singh   | Engineer         | 9876543223          |           180000.00 | 234 vashi            | 101 Patna 3rd cross | /images/mr.jpg  | 2023-03-15  | Active          | I am good in coding             | HDFC                | DIPLOMA                | Received       | Good      |
+|   18 | CandidateId00018 | Anvi      | Kumar      | Sharma   | anvi.sharma@email.com    | Bangalore | B.E    | 2023-06-30 | 7890123456   | 560001           | Lab3     | Positive | Clear and effective communication | Solid technical skills       | Outstanding performance | 2023-12-11 14:06:10 |           1 | 1999-11-18 |                   1 | Mr yadav   | Engineer         | 9876543224          |           200000.00 | 456 vashi gaon       | 789 gurugram        | /images/mrs.jpg | 2023-06-30  | Active          | I am good in coding             | HDFC                | B.Tech                 | Received       | Excellent |
+|   19 | CandidateId00019 | Aryan     | Raj        | Patel    | aryan.patel@email.com    | Mumbai    | B.E    | 2023-07-04 | 9876543210   | 400001           | Lab1     | Positive | Ok communicator                   | Strong technical skills      | Ok                      | 2023-12-11 14:06:13 |           1 | 1998-10-05 |                   1 | Mr Suresh  | Advocate         | 9876543225          |           180000.00 | 789 kolkata 4th road | 101 kolkata         | /images/j.jpg   | 2023-07-04  | Active          | I am good in coding and singing | SBI                 | B.Tech                 | Received       | Good      |
++------+------------------+-----------+------------+----------+--------------------------+-----------+--------+------------+--------------+------------------+----------+----------+-----------------------------------+------------------------------+-------------------------+---------------------+-------------+------------+---------------------+------------+------------------+---------------------+---------------------+----------------------+---------------------+-----------------+-------------+-----------------+---------------------------------+---------------------+------------------------+----------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE CandidateBankDetails (    Id INT AUTO_INCREMENT PRIMARY KEY,    CandidateId VARCHAR(20),    Name VARCHAR(20),    AccountNumber VARCHAR(20),    IsAccountNumVerified BOOLEAN,    IfscCode VARCHAR(20),    IsIFSCCodeVerified BOOLEAN,    PanNumber VARCHAR(10),    IsPanNumberVerified BOOLEAN,    AadhaarNumber VARCHAR(12),    IsAadhaarNumVerified BOOLEAN,    CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    CreatorUser INT,    FOREIGN KEY (CandidateId) REFERENCES FellowshipCandidate(CandidateId));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc CandidateBankDetails;
++----------------------+-------------+------+-----+-------------------+-------------------+
+| Field                | Type        | Null | Key | Default           | Extra             |
++----------------------+-------------+------+-----+-------------------+-------------------+
+| Id                   | int         | NO   | PRI | NULL              | auto_increment    |
+| CandidateId          | varchar(20) | YES  | MUL | NULL              |                   |
+| Name                 | varchar(20) | YES  |     | NULL              |                   |
+| AccountNumber        | varchar(20) | YES  |     | NULL              |                   |
+| IsAccountNumVerified | tinyint(1)  | YES  |     | NULL              |                   |
+| IfscCode             | varchar(20) | YES  |     | NULL              |                   |
+| IsIFSCCodeVerified   | tinyint(1)  | YES  |     | NULL              |                   |
+| PanNumber            | varchar(10) | YES  |     | NULL              |                   |
+| IsPanNumberVerified  | tinyint(1)  | YES  |     | NULL              |                   |
+| AadhaarNumber        | varchar(12) | YES  |     | NULL              |                   |
+| IsAadhaarNumVerified | tinyint(1)  | YES  |     | NULL              |                   |
+| CreatorStamp         | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser          | int         | YES  |     | NULL              |                   |
++----------------------+-------------+------+-----+-------------------+-------------------+
+13 rows in set (0.00 sec)
+
+mysql> INSERT INTO CandidateBankDetails(    Name,    AccountNumber,    IsAccountNumVerified,    IfscCode,    IsIFSCCodeVerified,PanNumber,    IsPanNumberVerified,    AadhaarNumber,    IsAadhaarNumVerified,    CreatorStamp,    CreatorUser)SELECT 'SBI' AS Name,    'SBI100809' AS AccountNumber,    true AS IsAccountNumVerified,    'SBI0809' AS IfscCode,    true AS IsIFSCCodeVerified,    'EGFWNJ245J' AS PanNumber,    true AS IsPanNumberVerified,    '898787347878' AS AadhaarNumber,    true AS IsAadhaarNumVerified,    NOW() AS CreatorStamp,    1 AS CreatorUserFROM FellowshipCandidateWHERE CandidateId='CandidateId00001' AND CandidateStatus = 'Active';INSERT INTO CandidateBankDetails(    Name,    AccountNumber,    IsAccountNumVerified,    IfscCode,    IsIFSCCodeVerified,PanNumber,    IsPanNumberVerified,    AadhaarNumber,    IsAadhaarNumVerified,    CreatorStamp,    CreatorUser)SELECT 'SBI' AS Name,    'SBI100809' AS AccountNumber,    true AS IsAccountNumVerified,    'SBI0809' AS IfscCode,    true AS IsIFSCCodeVerified,    'EGFWPJ245J' AS PanNumber,    true AS IsPanNumberVerified,    '842907980120' AS AadhaarNumber,    true AS IsAadhaarNumVerified,    NOW() AS CreatorStamp,    2 AS CreatorUserFROM FellowshipCandidateWHERE CandidateId='CandidateId00002' AND CandidateStatus = 'Active';INSERT INTO CandidateBankDetails(    Name,    AccountNumber,    IsAccountNumVerified,    IfscCode,    IsIFSCCodeVerified,    PanNumber,    IsPanNumberVerified,    AadhaarNumber,    IsAadhaarNumVerified,    CreatorStamp,    CreatorUser)SELECT     'HDFC' AS Name,    'HDFC987654' AS AccountNumber,    true AS IsAccountNumVerified,    'HDFC1234' AS IfscCode,    true AS IsIFSCCodeVerified,    'ABCPX1234Q' AS PanNumber,    true AS IsPanNumberVerified,    '987654321012' AS AadhaarNumber,    true AS IsAadhaarNumVerified,    NOW() AS CreatorStamp,    1 AS CreatorUserFROM FellowshipCandidateWHERE CandidateId = 'CandidateId00005' AND CandidateStatus = 'Active';INSERT INTO CandidateBankDetails(    Name,    AccountNumber,    IsAccountNumVerified,    IfscCode,    IsIFSCCodeVerified,    PanNumber,    IsPanNumberVerified,    AadhaarNumber,    IsAadhaarNumVerified,    CreatorStamp,    CreatorUser)SELECT     'ICICI' AS Name,    'ICICI765432' AS AccountNumber,    true AS IsAccountNumVerified,    'ICICI5678' AS IfscCode,    true AS IsIFSCCodeVerified,    'XYZAB5678C' AS PanNumber,    true AS IsPanNumberVerified,    '876543210987' AS AadhaarNumber,    true AS IsAadhaarNumVerified,    NOW() AS CreatorStamp,    1 AS CreatorUserFROM FellowshipCandidateWHERE CandidateId = 'CandidateId00009' AND CandidateStatus = 'Active';INSERT INTO CandidateBankDetails(    Name,    AccountNumber,    IsAccountNumVerified,    IfscCode,    IsIFSCCodeVerified,    PanNumber,    IsPanNumberVerified,    AadhaarNumber,    IsAadhaarNumVerified,    CreatorStamp,    CreatorUser)SELECT     'HDFC' AS Name,    'HDFC987654' AS AccountNumber,    true AS IsAccountNumVerified,    'HDFC4321' AS IfscCode,    true AS IsIFSCCodeVerified,    'PQRCD8765F' AS PanNumber,    true AS IsPanNumberVerified,    '765432109876' AS AadhaarNumber,    true AS IsAadhaarNumVerified,    NOW() AS CreatorStamp,    3 AS CreatorUserFROM FellowshipCandidateWHERE CandidateId = 'CandidateId00012' AND CandidateStatus = 'Active';INSERT INTO CandidateBankDetails(    Name,    AccountNumber,    IsAccountNumVerified,    IfscCode,    IsIFSCCodeVerified,    PanNumber,    IsPanNumberVerified,    AadhaarNumber,    IsAadhaarNumVerified,    CreatorStamp,    CreatorUser)SELECT     'ICICI' AS Name,    'ICICI765432' AS AccountNumber,    true AS IsAccountNumVerified,    'ICICI1234' AS IfscCode,    true AS IsIFSCCodeVerified,    'ABCXY1234Z' AS PanNumber,    true AS IsPanNumberVerified,    '876543210987' AS AadhaarNumber,    true AS IsAadhaarNumVerified,    NOW() AS CreatorStamp,    2 AS CreatorUserFROM FellowshipCandidateWHERE CandidateId = 'CandidateId00015' AND CandidateStatus = 'Active';INSERT INTO CandidateBankDetails(    Name,    AccountNumber,    IsAccountNumVerified,    IfscCode,    IsIFSCCodeVerified,    PanNumber,    IsPanNumberVerified,    AadhaarNumber,    IsAadhaarNumVerified,    CreatorStamp,    CreatorUser)SELECT     'HDFC' AS Name,    'HDFC987654' AS AccountNumber,    true AS IsAccountNumVerified,    'HDFC4321' AS IfscCode,    true AS IsIFSCCodeVerified,    'PQRAB5678C' AS PanNumber,    true AS IsPanNumberVerified,    '765432109876' AS AadhaarNumber,    true AS IsAadhaarNumVerified,    NOW() AS CreatorStamp,    1 AS CreatorUserFROM FellowshipCandidateWHERE CandidateId = 'CandidateId00018' AND CandidateStatus = 'Active';INSERT INTO CandidateBankDetails(    Name,    AccountNumber,    IsAccountNumVerified,    IfscCode,    IsIFSCCodeVerified,    PanNumber,    IsPanNumberVerified,    AadhaarNumber,    IsAadhaarNumVerified,    CreatorStamp,    CreatorUser)SELECT     'SBI' AS Name,    'SBI98765' AS AccountNumber,    true AS IsAccountNumVerified,    'SBI4321' AS IfscCode,    true AS IsIFSCCodeVerified,    'ABCDE1234F' AS PanNumber,    true AS IsPanNumberVerified,    '987654321012' AS AadhaarNumber,    true AS IsAadhaarNumVerified,    NOW() AS CreatorStamp,    3 AS CreatorUserFROM FellowshipCandidateWHERE CandidateId = 'CandidateId00019' AND CandidateStatus = 'Active';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FellowshipCandidateWHERE CandidateId='CandidateId00001' AND CandidateStatus = 'A' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FellowshipCandidateWHERE CandidateId='CandidateId00002' AND CandidateStatus = 'A' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FellowshipCandidateWHERE CandidateId = 'CandidateId00005' AND CandidateStatus = ' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FellowshipCandidateWHERE CandidateId = 'CandidateId00009' AND CandidateStatus = ' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FellowshipCandidateWHERE CandidateId = 'CandidateId00012' AND CandidateStatus = ' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FellowshipCandidateWHERE CandidateId = 'CandidateId00015' AND CandidateStatus = ' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FellowshipCandidateWHERE CandidateId = 'CandidateId00018' AND CandidateStatus = ' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FellowshipCandidateWHERE CandidateId = 'CandidateId00019' AND CandidateStatus = ' at line 1
+mysql> INSERT INTO CandidateBankDetails(
+    ->     CandidateId,
+    ->     Name,
+    ->     AccountNumber,
+    ->     IsAccountNumVerified,
+    ->     IfscCode,
+    ->     IsIFSCCodeVerified,
+    -> PanNumber,
+    ->     IsPanNumberVerified,
+    ->     AadhaarNumber,
+    ->     IsAadhaarNumVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT 
+    ->     CandidateId,
+    ->     'SBI' AS Name,
+    ->     'SBI100809' AS AccountNumber,
+    ->     true AS IsAccountNumVerified,
+    ->     'SBI0809' AS IfscCode,
+    ->     true AS IsIFSCCodeVerified,
+    ->     'EGFWNJ245J' AS PanNumber,
+    ->     true AS IsPanNumberVerified,
+    ->     '898787347878' AS AadhaarNumber,
+    ->     true AS IsAadhaarNumVerified,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId='CandidateId00001' AND CandidateStatus = 'Active';
+Query OK, 1 row affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateBankDetails(
+    ->     CandidateId,
+    ->     Name,
+    ->     AccountNumber,
+    ->     IsAccountNumVerified,
+    ->     IfscCode,
+    ->     IsIFSCCodeVerified,
+    -> PanNumber,
+    ->     IsPanNumberVerified,
+    ->     AadhaarNumber,
+    ->     IsAadhaarNumVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT 
+    ->     CandidateId,
+    -> 'SBI' AS Name,
+    ->     'SBI100809' AS AccountNumber,
+    ->     true AS IsAccountNumVerified,
+    ->     'SBI0809' AS IfscCode,
+    ->     true AS IsIFSCCodeVerified,
+    ->     'EGFWPJ245J' AS PanNumber,
+    ->     true AS IsPanNumberVerified,
+    ->     '842907980120' AS AadhaarNumber,
+    ->     true AS IsAadhaarNumVerified,
+    ->     NOW() AS CreatorStamp,
+    ->     2 AS CreatorUser
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId='CandidateId00002' AND CandidateStatus = 'Active';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateBankDetails(
+    ->     CandidateId,
+    ->     Name,
+    ->     AccountNumber,
+    ->     IsAccountNumVerified,
+    ->     IfscCode,
+    ->     IsIFSCCodeVerified,
+    ->     PanNumber,
+    ->     IsPanNumberVerified,
+    ->     AadhaarNumber,
+    ->     IsAadhaarNumVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT 
+    ->      CandidateId,
+    ->     'HDFC' AS Name,
+    ->     'HDFC987654' AS AccountNumber,
+    ->     true AS IsAccountNumVerified,
+    ->     'HDFC1234' AS IfscCode,
+    ->     true AS IsIFSCCodeVerified,
+    ->     'ABCPX1234Q' AS PanNumber,
+    ->     true AS IsPanNumberVerified,
+    ->     '987654321012' AS AadhaarNumber,
+    ->     true AS IsAadhaarNumVerified,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00005' AND CandidateStatus = 'Active';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateBankDetails(
+    ->     CandidateId,
+    ->     Name,
+    ->     AccountNumber,
+    ->     IsAccountNumVerified,
+    ->     IfscCode,
+    ->     IsIFSCCodeVerified,
+    ->     PanNumber,
+    ->     IsPanNumberVerified,
+    ->     AadhaarNumber,
+    ->     IsAadhaarNumVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT 
+    ->      CandidateId,
+    ->     'ICICI' AS Name,
+    ->     'ICICI765432' AS AccountNumber,
+    ->     true AS IsAccountNumVerified,
+    ->     'ICICI5678' AS IfscCode,
+    ->     true AS IsIFSCCodeVerified,
+    ->     'XYZAB5678C' AS PanNumber,
+    ->     true AS IsPanNumberVerified,
+    ->     '876543210987' AS AadhaarNumber,
+    ->     true AS IsAadhaarNumVerified,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00009' AND CandidateStatus = 'Active';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateBankDetails(
+    ->     CandidateId,
+    ->     Name,
+    ->     AccountNumber,
+    ->     IsAccountNumVerified,
+    ->     IfscCode,
+    ->     IsIFSCCodeVerified,
+    ->     PanNumber,
+    ->     IsPanNumberVerified,
+    ->     AadhaarNumber,
+    ->     IsAadhaarNumVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT 
+    ->      CandidateId,
+    ->     'HDFC' AS Name,
+    ->     'HDFC987654' AS AccountNumber,
+    ->     true AS IsAccountNumVerified,
+    ->     'HDFC4321' AS IfscCode,
+    ->     true AS IsIFSCCodeVerified,
+    ->     'PQRCD8765F' AS PanNumber,
+    ->     true AS IsPanNumberVerified,
+    ->     '765432109876' AS AadhaarNumber,
+    ->     true AS IsAadhaarNumVerified,
+    ->     NOW() AS CreatorStamp,
+    ->     3 AS CreatorUser
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00012' AND CandidateStatus = 'Active';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateBankDetails(
+    ->     CandidateId,
+    ->     Name,
+    ->     AccountNumber,
+    ->     IsAccountNumVerified,
+    ->     IfscCode,
+    ->     IsIFSCCodeVerified,
+    ->     PanNumber,
+    ->     IsPanNumberVerified,
+    ->     AadhaarNumber,
+    ->     IsAadhaarNumVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT 
+    ->      CandidateId,
+    ->     'ICICI' AS Name,
+    ->     'ICICI765432' AS AccountNumber,
+    ->     true AS IsAccountNumVerified,
+    ->     'ICICI1234' AS IfscCode,
+    ->     true AS IsIFSCCodeVerified,
+    ->     'ABCXY1234Z' AS PanNumber,
+    ->     true AS IsPanNumberVerified,
+    ->     '876543210987' AS AadhaarNumber,
+    ->     true AS IsAadhaarNumVerified,
+    ->     NOW() AS CreatorStamp,
+    ->     2 AS CreatorUser
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00015' AND CandidateStatus = 'Active';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateBankDetails(
+    ->     CandidateId,
+    ->     Name,
+    ->     AccountNumber,
+    ->     IsAccountNumVerified,
+    ->     IfscCode,
+    ->     IsIFSCCodeVerified,
+    ->     PanNumber,
+    ->     IsPanNumberVerified,
+    ->     AadhaarNumber,
+    ->     IsAadhaarNumVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT 
+    ->     CandidateId,
+    ->     'HDFC' AS Name,
+    ->     'HDFC987654' AS AccountNumber,
+    ->     true AS IsAccountNumVerified,
+    ->     'HDFC4321' AS IfscCode,
+    ->     true AS IsIFSCCodeVerified,
+    ->     'PQRAB5678C' AS PanNumber,
+    ->     true AS IsPanNumberVerified,
+    ->     '765432109876' AS AadhaarNumber,
+    ->     true AS IsAadhaarNumVerified,
+    ->     NOW() AS CreatorStamp,
+    ->     1 AS CreatorUser
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00018' AND CandidateStatus = 'Active';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateBankDetails(
+    ->     CandidateId,
+    ->     Name,
+    ->     AccountNumber,
+    ->     IsAccountNumVerified,
+    ->     IfscCode,
+    ->     IsIFSCCodeVerified,
+    ->     PanNumber,
+    ->     IsPanNumberVerified,
+    ->     AadhaarNumber,
+    ->     IsAadhaarNumVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT 
+    ->      CandidateId,
+    ->     'SBI' AS Name,
+    ->     'SBI98765' AS AccountNumber,
+    ->     true AS IsAccountNumVerified,
+    ->     'SBI4321' AS IfscCode,
+    ->     true AS IsIFSCCodeVerified,
+    ->     'ABCDE1234F' AS PanNumber,
+    ->     true AS IsPanNumberVerified,
+    ->     '987654321012' AS AadhaarNumber,
+    ->     true AS IsAadhaarNumVerified,
+    ->     NOW() AS CreatorStamp,
+    ->     3 AS CreatorUser
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00019' AND CandidateStatus = 'Active';
+Query OK, 1 row affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CandidateBankDetails;
++----+------------------+-------+---------------+----------------------+-----------+--------------------+------------+---------------------+---------------+----------------------+---------------------+-------------+
+| Id | CandidateId      | Name  | AccountNumber | IsAccountNumVerified | IfscCode  | IsIFSCCodeVerified | PanNumber  | IsPanNumberVerified | AadhaarNumber | IsAadhaarNumVerified | CreatorStamp        | CreatorUser |
++----+------------------+-------+---------------+----------------------+-----------+--------------------+------------+---------------------+---------------+----------------------+---------------------+-------------+
+|  1 | CandidateId00001 | SBI   | SBI100809     |                    1 | SBI0809   |                  1 | EGFWNJ245J |                   1 | 898787347878  |                    1 | 2023-12-11 14:14:08 |           1 |
+|  2 | CandidateId00002 | SBI   | SBI100809     |                    1 | SBI0809   |                  1 | EGFWPJ245J |                   1 | 842907980120  |                    1 | 2023-12-11 14:14:08 |           2 |
+|  3 | CandidateId00005 | HDFC  | HDFC987654    |                    1 | HDFC1234  |                  1 | ABCPX1234Q |                   1 | 987654321012  |                    1 | 2023-12-11 14:14:08 |           1 |
+|  4 | CandidateId00009 | ICICI | ICICI765432   |                    1 | ICICI5678 |                  1 | XYZAB5678C |                   1 | 876543210987  |                    1 | 2023-12-11 14:14:08 |           1 |
+|  5 | CandidateId00012 | HDFC  | HDFC987654    |                    1 | HDFC4321  |                  1 | PQRCD8765F |                   1 | 765432109876  |                    1 | 2023-12-11 14:14:08 |           3 |
+|  6 | CandidateId00015 | ICICI | ICICI765432   |                    1 | ICICI1234 |                  1 | ABCXY1234Z |                   1 | 876543210987  |                    1 | 2023-12-11 14:14:08 |           2 |
+|  7 | CandidateId00018 | HDFC  | HDFC987654    |                    1 | HDFC4321  |                  1 | PQRAB5678C |                   1 | 765432109876  |                    1 | 2023-12-11 14:14:08 |           1 |
+|  8 | CandidateId00019 | SBI   | SBI98765      |                    1 | SBI4321   |                  1 | ABCDE1234F |                   1 | 987654321012  |                    1 | 2023-12-11 14:14:24 |           3 |
++----+------------------+-------+---------------+----------------------+-----------+--------------------+------------+---------------------+---------------+----------------------+---------------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE CandidateQualification (
+    ->     Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     CandidateId VARCHAR(20),
+    ->     Diploma VARCHAR(30),
+    ->     DegreeName VARCHAR(20),
+    ->     IsDegreeNameVerified BOOLEAN,
+    ->     EmployeeDiscipline VARCHAR(20),
+    ->     IsEmployeeDisciplineVerified BOOLEAN,
+    ->     PassingYear INT,
+    ->     IsPassingYearVerified BOOLEAN,
+    ->     AggrPer DECIMAL(5, 2),
+    ->     IsAggrPerVerified BOOLEAN,
+    ->     FinalYearPer DECIMAL(5, 2),
+    ->     IsFinalYearPerVerified BOOLEAN,
+    ->     TrainingInstitute VARCHAR(20),
+    ->     IsTrainingInstituteVerified BOOLEAN,
+    ->     TrainingDurationMonth INT,
+    ->     IsTrainingDurationMonthVerified BOOLEAN,
+    ->     OtherTraining VARCHAR(20),
+    ->     IsOtherTrainingVerified BOOLEAN,
+    ->     CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     CreatorUser INT,
+    ->     FOREIGN KEY (CandidateId) REFERENCES FellowshipCandidate(CandidateId)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc CandidateQualification;
++---------------------------------+--------------+------+-----+-------------------+-------------------+
+| Field                           | Type         | Null | Key | Default           | Extra             |
++---------------------------------+--------------+------+-----+-------------------+-------------------+
+| Id                              | int          | NO   | PRI | NULL              | auto_increment    |
+| CandidateId                     | varchar(20)  | YES  | MUL | NULL              |                   |
+| Diploma                         | varchar(30)  | YES  |     | NULL              |                   |
+| DegreeName                      | varchar(20)  | YES  |     | NULL              |                   |
+| IsDegreeNameVerified            | tinyint(1)   | YES  |     | NULL              |                   |
+| EmployeeDiscipline              | varchar(20)  | YES  |     | NULL              |                   |
+| IsEmployeeDisciplineVerified    | tinyint(1)   | YES  |     | NULL              |                   |
+| PassingYear                     | int          | YES  |     | NULL              |                   |
+| IsPassingYearVerified           | tinyint(1)   | YES  |     | NULL              |                   |
+| AggrPer                         | decimal(5,2) | YES  |     | NULL              |                   |
+| IsAggrPerVerified               | tinyint(1)   | YES  |     | NULL              |                   |
+| FinalYearPer                    | decimal(5,2) | YES  |     | NULL              |                   |
+| IsFinalYearPerVerified          | tinyint(1)   | YES  |     | NULL              |                   |
+| TrainingInstitute               | varchar(20)  | YES  |     | NULL              |                   |
+| IsTrainingInstituteVerified     | tinyint(1)   | YES  |     | NULL              |                   |
+| TrainingDurationMonth           | int          | YES  |     | NULL              |                   |
+| IsTrainingDurationMonthVerified | tinyint(1)   | YES  |     | NULL              |                   |
+| OtherTraining                   | varchar(20)  | YES  |     | NULL              |                   |
+| IsOtherTrainingVerified         | tinyint(1)   | YES  |     | NULL              |                   |
+| CreatorStamp                    | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser                     | int          | YES  |     | NULL              |                   |
++---------------------------------+--------------+------+-----+-------------------+-------------------+
+21 rows in set (0.00 sec)
+
+mysql> INSERT INTO CandidateQualification (
+    ->     CandidateId,
+    ->     Diploma,
+    ->     DegreeName,
+    ->     IsDegreeNameVerified,
+    ->     EmployeeDiscipline,
+    ->     IsEmployeeDisciplineVerified,
+    ->     PassingYear,
+    ->     IsPassingYearVerified,
+    ->     AggrPer,
+    ->     IsAggrPerVerified,
+    ->     FinalYearPer,
+    ->     IsFinalYearPerVerified,
+    ->     TrainingInstitute,
+    ->     IsTrainingInstituteVerified,
+    ->     TrainingDurationMonth,
+    ->     IsTrainingDurationMonthVerified,
+    ->     OtherTraining,
+    ->     IsOtherTrainingVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->      CandidateId,
+    ->     'Diploma in Computer Science',
+    ->     'B.Tech',
+    ->     true,
+    ->     'Computer Science',
+    ->     true,
+    ->     2019,
+    ->     true,
+    ->     75.50,
+    ->     true,
+    ->     78.00,
+    ->     true,
+    ->     'ABC Institute',
+    ->     true,
+    ->     12,
+    ->     true,
+    ->     'Java Programming',
+    ->     true,
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00001';
+Query OK, 1 row affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateQualification (
+    ->     CandidateId,
+    ->     Diploma,
+    ->     DegreeName,
+    ->     IsDegreeNameVerified,
+    ->     EmployeeDiscipline,
+    ->     IsEmployeeDisciplineVerified,
+    ->     PassingYear,
+    ->     IsPassingYearVerified,
+    ->     AggrPer,
+    ->     IsAggrPerVerified,
+    ->     FinalYearPer,
+    ->     IsFinalYearPerVerified,
+    ->     TrainingInstitute,
+    ->     IsTrainingInstituteVerified,
+    ->     TrainingDurationMonth,
+    ->     IsTrainingDurationMonthVerified,
+    ->     OtherTraining,
+    ->     IsOtherTrainingVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Diploma in Electrical',
+    ->     'B.E.',
+    ->     true,
+    ->     'Electrical Eng',
+    ->     true,
+    ->     2020,
+    ->     true,
+    ->     80.00,
+    ->     true,
+    ->     82.50,
+    ->     true,
+    ->     'XYZ Institute',
+    ->     true,
+    ->     15,
+    ->     true,
+    ->     'Embedded Systems',
+    ->     true,
+    ->     NOW(),
+    ->     2
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00002';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO CandidateQualification (
+    ->     CandidateId,
+    ->     Diploma,
+    ->     DegreeName,
+    ->     IsDegreeNameVerified,
+    ->     EmployeeDiscipline,
+    ->     IsEmployeeDisciplineVerified,
+    ->     PassingYear,
+    ->     IsPassingYearVerified,
+    ->     AggrPer,
+    ->     IsAggrPerVerified,
+    ->     FinalYearPer,
+    ->     IsFinalYearPerVerified,
+    ->     TrainingInstitute,
+    ->     IsTrainingInstituteVerified,
+    ->     TrainingDurationMonth,
+    ->     IsTrainingDurationMonthVerified,
+    ->     OtherTraining,
+    ->     IsOtherTrainingVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Diploma in Mechanical',
+    ->     'B.Tech',
+    ->     true,
+    ->     'Mechanical Eng',
+    ->     true,
+    ->     2018,
+    ->     true,
+    ->     72.80,
+    ->     true,
+    ->     75.00,
+    ->     true,
+    ->     'PES College',
+    ->     true,
+    ->     18,
+    ->     true,
+    ->     'CAD/CAM',
+    ->     true,
+    ->     NOW(),
+    ->     3
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00005';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateQualification (
+    ->     CandidateId,
+    ->     Diploma,
+    ->     DegreeName,
+    ->     IsDegreeNameVerified,
+    ->     EmployeeDiscipline,
+    ->     IsEmployeeDisciplineVerified,
+    ->     PassingYear,
+    ->     IsPassingYearVerified,
+    ->     AggrPer,
+    ->     IsAggrPerVerified,
+    ->     FinalYearPer,
+    ->     IsFinalYearPerVerified,
+    ->     TrainingInstitute,
+    ->     IsTrainingInstituteVerified,
+    ->     TrainingDurationMonth,
+    ->     IsTrainingDurationMonthVerified,
+    ->     OtherTraining,
+    ->     IsOtherTrainingVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Diploma in Civil',
+    ->     'B.E',
+    ->     true,
+    ->     'Civil Engineering',
+    ->     true,
+    ->     2017,
+    ->     true,
+    ->     80.00,
+    ->     true,
+    ->     82.50,
+    ->     true,
+    ->     'IIT ',
+    ->     true,
+    ->     15,
+    ->     true,
+    ->     'Embedded Systems',
+    ->     true,
+    ->     NOW(),
+    ->     3
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00009';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateQualification (
+    ->     CandidateId,
+    ->     Diploma,
+    ->     DegreeName,
+    ->     IsDegreeNameVerified,
+    ->     EmployeeDiscipline,
+    ->     IsEmployeeDisciplineVerified,
+    ->     PassingYear,
+    ->     IsPassingYearVerified,
+    ->     AggrPer,
+    ->     IsAggrPerVerified,
+    ->     FinalYearPer,
+    ->     IsFinalYearPerVerified,
+    ->     TrainingInstitute,
+    ->     IsTrainingInstituteVerified,
+    ->     TrainingDurationMonth,
+    ->     IsTrainingDurationMonthVerified,
+    ->     OtherTraining,
+    ->     IsOtherTrainingVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Diploma in Mechanical',
+    ->     'B.Tech',
+    ->     true,
+    ->     'Mechanical Eng',
+    ->     true,
+    ->     2018,
+    ->     true,
+    ->     76.80,
+    ->     true,
+    ->     79.50,
+    ->     true,
+    ->     'IIIT College',
+    ->     true,
+    ->     18,
+    ->     true,
+    ->     'CAD/CAM',
+    ->     true,
+    ->     NOW(),
+    ->     3
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00012';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateQualification (
+    ->     CandidateId,
+    ->     Diploma,
+    ->     DegreeName,
+    ->     IsDegreeNameVerified,
+    ->     EmployeeDiscipline,
+    ->     IsEmployeeDisciplineVerified,
+    ->     PassingYear,
+    ->     IsPassingYearVerified,
+    ->     AggrPer,
+    ->     IsAggrPerVerified,
+    ->     FinalYearPer,
+    ->     IsFinalYearPerVerified,
+    ->     TrainingInstitute,
+    ->     IsTrainingInstituteVerified,
+    ->     TrainingDurationMonth,
+    ->     IsTrainingDurationMonthVerified,
+    ->     OtherTraining,
+    ->     IsOtherTrainingVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Diploma in Electrical',
+    ->     'B.E',
+    ->     true,
+    ->     'Electrical Eng',
+    ->     true,
+    ->     2019,
+    ->     true,
+    ->     78.50,
+    ->     true,
+    ->     81.00,
+    ->     true,
+    ->     'NIT Delhi',
+    ->     true,
+    ->     15,
+    ->     true,
+    ->     'PLC Programming',
+    ->     true,
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00015';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateQualification (
+    ->     CandidateId,
+    ->     Diploma,
+    ->     DegreeName,
+    ->     IsDegreeNameVerified,
+    ->     EmployeeDiscipline,
+    ->     IsEmployeeDisciplineVerified,
+    ->     PassingYear,
+    ->     IsPassingYearVerified,
+    ->     AggrPer,
+    ->     IsAggrPerVerified,
+    ->     FinalYearPer,
+    ->     IsFinalYearPerVerified,
+    ->     TrainingInstitute,
+    ->     IsTrainingInstituteVerified,
+    ->     TrainingDurationMonth,
+    ->     IsTrainingDurationMonthVerified,
+    ->     OtherTraining,
+    ->     IsOtherTrainingVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Diploma in Mechanical Eng',
+    ->     'B.Tech',
+    ->     true,
+    ->     'Mechanical Eng',
+    ->     true,
+    ->     2018,
+    ->     true,
+    ->     79.00,
+    ->     true,
+    ->     82.50,
+    ->     true,
+    ->     'SIT College',
+    ->     true,
+    ->     14,
+    ->     true,
+    ->     'CAD/CAM',
+    ->     true,
+    ->     NOW(),
+    ->     2
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00018';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateQualification (
+    ->     CandidateId,
+    ->     Diploma,
+    ->     DegreeName,
+    ->     IsDegreeNameVerified,
+    ->     EmployeeDiscipline,
+    ->     IsEmployeeDisciplineVerified,
+    ->     PassingYear,
+    ->     IsPassingYearVerified,
+    ->     AggrPer,
+    ->     IsAggrPerVerified,
+    ->     FinalYearPer,
+    ->     IsFinalYearPerVerified,
+    ->     TrainingInstitute,
+    ->     IsTrainingInstituteVerified,
+    ->     TrainingDurationMonth,
+    ->     IsTrainingDurationMonthVerified,
+    ->     OtherTraining,
+    ->     IsOtherTrainingVerified,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Diploma in Automobile Eng',
+    ->     'B.Tech',
+    ->     true,
+    ->     'Automobile Eng',
+    ->     true,
+    ->     2017,
+    ->     true,
+    ->     80.00,
+    ->     true,
+    ->     85.50,
+    ->     true,
+    ->     'PESCE',
+    ->     true,
+    ->     18,
+    ->     true,
+    ->     'C Programming',
+    ->     true,
+    ->     NOW(),
+    ->     2
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00019';
+Query OK, 1 row affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> select * from CandidateQualification ;
++----+------------------+-----------------------------+------------+----------------------+--------------------+------------------------------+-------------+-----------------------+---------+-------------------+--------------+------------------------+-------------------+-----------------------------+-----------------------+---------------------------------+------------------+-------------------------+---------------------+-------------+
+| Id | CandidateId      | Diploma                     | DegreeName | IsDegreeNameVerified | EmployeeDiscipline | IsEmployeeDisciplineVerified | PassingYear | IsPassingYearVerified | AggrPer | IsAggrPerVerified | FinalYearPer | IsFinalYearPerVerified | TrainingInstitute | IsTrainingInstituteVerified | TrainingDurationMonth | IsTrainingDurationMonthVerified | OtherTraining    | IsOtherTrainingVerified | CreatorStamp        | CreatorUser |
++----+------------------+-----------------------------+------------+----------------------+--------------------+------------------------------+-------------+-----------------------+---------+-------------------+--------------+------------------------+-------------------+-----------------------------+-----------------------+---------------------------------+------------------+-------------------------+---------------------+-------------+
+|  1 | CandidateId00001 | Diploma in Computer Science | B.Tech     |                    1 | Computer Science   |                            1 |        2019 |                     1 |   75.50 |                 1 |        78.00 |                      1 | ABC Institute     |                           1 |                    12 |                               1 | Java Programming |                       1 | 2023-12-11 14:17:10 |           1 |
+|  2 | CandidateId00002 | Diploma in Electrical       | B.E.       |                    1 | Electrical Eng     |                            1 |        2020 |                     1 |   80.00 |                 1 |        82.50 |                      1 | XYZ Institute     |                           1 |                    15 |                               1 | Embedded Systems |                       1 | 2023-12-11 14:17:10 |           2 |
+|  3 | CandidateId00005 | Diploma in Mechanical       | B.Tech     |                    1 | Mechanical Eng     |                            1 |        2018 |                     1 |   72.80 |                 1 |        75.00 |                      1 | PES College       |                           1 |                    18 |                               1 | CAD/CAM          |                       1 | 2023-12-11 14:17:10 |           3 |
+|  4 | CandidateId00009 | Diploma in Civil            | B.E        |                    1 | Civil Engineering  |                            1 |        2017 |                     1 |   80.00 |                 1 |        82.50 |                      1 | IIT               |                           1 |                    15 |                               1 | Embedded Systems |                       1 | 2023-12-11 14:17:10 |           3 |
+|  5 | CandidateId00012 | Diploma in Mechanical       | B.Tech     |                    1 | Mechanical Eng     |                            1 |        2018 |                     1 |   76.80 |                 1 |        79.50 |                      1 | IIIT College      |                           1 |                    18 |                               1 | CAD/CAM          |                       1 | 2023-12-11 14:17:10 |           3 |
+|  6 | CandidateId00015 | Diploma in Electrical       | B.E        |                    1 | Electrical Eng     |                            1 |        2019 |                     1 |   78.50 |                 1 |        81.00 |                      1 | NIT Delhi         |                           1 |                    15 |                               1 | PLC Programming  |                       1 | 2023-12-11 14:17:11 |           1 |
+|  7 | CandidateId00018 | Diploma in Mechanical Eng   | B.Tech     |                    1 | Mechanical Eng     |                            1 |        2018 |                     1 |   79.00 |                 1 |        82.50 |                      1 | SIT College       |                           1 |                    14 |                               1 | CAD/CAM          |                       1 | 2023-12-11 14:17:11 |           2 |
+|  8 | CandidateId00019 | Diploma in Automobile Eng   | B.Tech     |                    1 | Automobile Eng     |                            1 |        2017 |                     1 |   80.00 |                 1 |        85.50 |                      1 | PESCE             |                           1 |                    18 |                               1 | C Programming    |                       1 | 2023-12-11 14:17:12 |           2 |
++----+------------------+-----------------------------+------------+----------------------+--------------------+------------------------------+-------------+-----------------------+---------+-------------------+--------------+------------------------+-------------------+-----------------------------+-----------------------+---------------------------------+------------------+-------------------------+---------------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE CandidateDocuments (
+    ->     Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     CandidateId VARCHAR(20),
+    ->     DocType VARCHAR(20),
+    ->     DocPath VARCHAR(100),
+    ->     Status VARCHAR(20),
+    ->     CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     CreatorUser INT,
+    ->     FOREIGN KEY (CandidateId) REFERENCES FellowshipCandidate(CandidateId)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc CandidateDocuments;
++--------------+--------------+------+-----+-------------------+-------------------+
+| Field        | Type         | Null | Key | Default           | Extra             |
++--------------+--------------+------+-----+-------------------+-------------------+
+| Id           | int          | NO   | PRI | NULL              | auto_increment    |
+| CandidateId  | varchar(20)  | YES  | MUL | NULL              |                   |
+| DocType      | varchar(20)  | YES  |     | NULL              |                   |
+| DocPath      | varchar(100) | YES  |     | NULL              |                   |
+| Status       | varchar(20)  | YES  |     | NULL              |                   |
+| CreatorStamp | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser  | int          | YES  |     | NULL              |                   |
++--------------+--------------+------+-----+-------------------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO CandidateDocuments (
+    ->     CandidateId,
+    ->     DocType,
+    ->     DocPath,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Aadhar Card',
+    ->     '/documents/CandidateId00001_AadharCard.pdf',
+    ->     'Pending',
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00001';
+Query OK, 1 row affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateDocuments (
+    ->     CandidateId,
+    ->     DocType,
+    ->     DocPath,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Pan Card',
+    ->     '/documents/CandidateId00002_PanCard.pdf',
+    ->     'Pending',
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00002';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateDocuments (
+    ->     CandidateId,
+    ->     DocType,
+    ->     DocPath,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Aadhar Card',
+    ->     '/documents/CandidateId00005_AadharCard.pdf',
+    ->     'Pending',
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00005';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateDocuments (
+    ->     CandidateId,
+    ->     DocType,
+    ->     DocPath,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Pan Card',
+    ->     '/documents/CandidateId00009_PanCard.pdf',
+    ->     'Pending',
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00009';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateDocuments (
+    ->     CandidateId,
+    ->     DocType,
+    ->     DocPath,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Aadhar Card',
+    ->     '/documents/CandidateId00012_AadharCard.pdf',
+    ->     'Pending',
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00012';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateDocuments (
+    ->     CandidateId,
+    ->     DocType,
+    ->     DocPath,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Aadhar Card',
+    ->     '/documents/CandidateId00015_AadharCard.pdf',
+    ->     'Pending',
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00015';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateDocuments (
+    ->     CandidateId,
+    ->     DocType,
+    ->     DocPath,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Pan Card',
+    ->     '/documents/CandidateId00018_PanCard.pdf',
+    ->     'Pending',
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00018';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO CandidateDocuments (
+    ->     CandidateId,
+    ->     DocType,
+    ->     DocPath,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    ->     CandidateId,
+    ->     'Aadhar Card',
+    ->     '/documents/CandidateId00019_AadharCard.pdf',
+    ->     'Pending',
+    ->     NOW(),
+    ->     1
+    -> FROM FellowshipCandidate
+    -> WHERE CandidateId = 'CandidateId00019';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CandidateDocuments;
++----+------------------+-------------+--------------------------------------------+---------+---------------------+-------------+
+| Id | CandidateId      | DocType     | DocPath                                    | Status  | CreatorStamp        | CreatorUser |
++----+------------------+-------------+--------------------------------------------+---------+---------------------+-------------+
+|  1 | CandidateId00001 | Aadhar Card | /documents/CandidateId00001_AadharCard.pdf | Pending | 2023-12-11 14:21:07 |           1 |
+|  2 | CandidateId00002 | Pan Card    | /documents/CandidateId00002_PanCard.pdf    | Pending | 2023-12-11 14:21:07 |           1 |
+|  3 | CandidateId00005 | Aadhar Card | /documents/CandidateId00005_AadharCard.pdf | Pending | 2023-12-11 14:21:07 |           1 |
+|  4 | CandidateId00009 | Pan Card    | /documents/CandidateId00009_PanCard.pdf    | Pending | 2023-12-11 14:21:07 |           1 |
+|  5 | CandidateId00012 | Aadhar Card | /documents/CandidateId00012_AadharCard.pdf | Pending | 2023-12-11 14:21:07 |           1 |
+|  6 | CandidateId00015 | Aadhar Card | /documents/CandidateId00015_AadharCard.pdf | Pending | 2023-12-11 14:21:07 |           1 |
+|  7 | CandidateId00018 | Pan Card    | /documents/CandidateId00018_PanCard.pdf    | Pending | 2023-12-11 14:21:08 |           1 |
+|  8 | CandidateId00019 | Aadhar Card | /documents/CandidateId00019_AadharCard.pdf | Pending | 2023-12-11 14:21:10 |           1 |
++----+------------------+-------------+--------------------------------------------+---------+---------------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE LabThreshold (
+    ->     Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     LabId INT, 
+    ->     LabCapacity INT,
+    ->     LeadThreshold INT,
+    ->     IdeationEnggThreshold INT,
+    ->     BuddyEnggThreshold INT,
+    ->     Status VARCHAR(20),
+    ->     CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     CreatorUser INT,
+    ->     FOREIGN KEY (LabId) REFERENCES Mst_Lab(Id)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc LabThreshold;
++-----------------------+-------------+------+-----+-------------------+-------------------+
+| Field                 | Type        | Null | Key | Default           | Extra             |
++-----------------------+-------------+------+-----+-------------------+-------------------+
+| Id                    | int         | NO   | PRI | NULL              | auto_increment    |
+| LabId                 | int         | YES  | MUL | NULL              |                   |
+| LabCapacity           | int         | YES  |     | NULL              |                   |
+| LeadThreshold         | int         | YES  |     | NULL              |                   |
+| IdeationEnggThreshold | int         | YES  |     | NULL              |                   |
+| BuddyEnggThreshold    | int         | YES  |     | NULL              |                   |
+| Status                | varchar(20) | YES  |     | NULL              |                   |
+| CreatorStamp          | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser           | int         | YES  |     | NULL              |                   |
++-----------------------+-------------+------+-----+-------------------+-------------------+
+9 rows in set (0.00 sec)
+
+mysql> INSERT INTO LabThreshold (LabId, LabCapacity, LeadThreshold, IdeationEnggThreshold, BuddyEnggThreshold, Status, CreatorUser) VALUES
+    -> (1, 250, 6, 20, 40, 'Active', 1),
+    -> (2, 200, 3, 15, 30, 'Active', 2),
+    -> (3, 300, 5, 15, 30, 'Active', 3);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql>  SELECT * FROM LabThreshold;
++----+-------+-------------+---------------+-----------------------+--------------------+--------+---------------------+-------------+
+| Id | LabId | LabCapacity | LeadThreshold | IdeationEnggThreshold | BuddyEnggThreshold | Status | CreatorStamp        | CreatorUser |
++----+-------+-------------+---------------+-----------------------+--------------------+--------+---------------------+-------------+
+|  1 |     1 |         250 |             6 |                    20 |                 40 | Active | 2023-12-11 14:22:41 |           1 |
+|  2 |     2 |         200 |             3 |                    15 |                 30 | Active | 2023-12-11 14:22:41 |           2 |
+|  3 |     3 |         300 |             5 |                    15 |                 30 | Active | 2023-12-11 14:22:41 |           3 |
++----+-------+-------------+---------------+-----------------------+--------------------+--------+---------------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE MakerProgram (
+    ->     Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     ProgramName VARCHAR(20),
+    ->     ProgramType VARCHAR(20),
+    ->     ProgramLink VARCHAR(100),
+    ->     TechStackId INT,
+    ->     TechTypeId INT,
+    ->     IsProgramApproved BOOLEAN,
+    ->     Description TEXT,
+    ->     Status VARCHAR(20),
+    ->     CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     CreatorUser INT,
+    ->     FOREIGN KEY (TechStackId) REFERENCES Mst_TechStack(Id),
+    ->     FOREIGN KEY (TechTypeId) REFERENCES Mst_TechType(Id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc MakerProgram;
++-------------------+--------------+------+-----+-------------------+-------------------+
+| Field             | Type         | Null | Key | Default           | Extra             |
++-------------------+--------------+------+-----+-------------------+-------------------+
+| Id                | int          | NO   | PRI | NULL              | auto_increment    |
+| ProgramName       | varchar(20)  | YES  |     | NULL              |                   |
+| ProgramType       | varchar(20)  | YES  |     | NULL              |                   |
+| ProgramLink       | varchar(100) | YES  |     | NULL              |                   |
+| TechStackId       | int          | YES  | MUL | NULL              |                   |
+| TechTypeId        | int          | YES  | MUL | NULL              |                   |
+| IsProgramApproved | tinyint(1)   | YES  |     | NULL              |                   |
+| Description       | text         | YES  |     | NULL              |                   |
+| Status            | varchar(20)  | YES  |     | NULL              |                   |
+| CreatorStamp      | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser       | int          | YES  |     | NULL              |                   |
++-------------------+--------------+------+-----+-------------------+-------------------+
+11 rows in set (0.00 sec)
+
+mysql> INSERT  INTO MakerProgram (
+    ->     ProgramName,
+    ->     ProgramType,
+    ->     ProgramLink,
+    ->     TechStackId,
+    ->     TechTypeId,
+    ->     IsProgramApproved,
+    ->     Description,
+    ->     Status,
+    ->     CreatorUser
+    -> )
+    -> VALUES
+    -> (
+    ->     'Java_Full_Stack',
+    ->     (SELECT typename FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     'https://www.javatpoint.com/java-full-stack',
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'Java' AND Framework = 'Spring Boot' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     TRUE,
+    ->     'Description about the Java Full Stack program...',
+    ->     'Active',
+    ->     2
+    -> ),
+    -> (
+    ->     'ReactJs',
+    ->     (SELECT TypeName FROM Mst_TechType WHERE TypeName = 'FrontEnd'),
+    ->     'https://www.javatpoint.com/reactjs-tutorial',
+    ->     (SELECT Id FROM Mst_TechStack WHERE FrameWork = 'React' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FrontEnd'),
+    ->     TRUE,
+    ->     'Description about the React Frontend program...',
+    ->     'Active',
+    ->     3
+    -> ),
+    -> (
+    ->     'Angular_Full_Stack',
+    ->     (SELECT TypeName FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     'https://www.javatpoint.com/angularjs-tutorial',
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'Angular' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     TRUE,
+    ->     'Description about the Angular Full Stack program...',
+    ->     'Active',
+    ->     3
+    -> ),
+    -> (
+    ->     'Java_Backend',
+    ->     (SELECT TypeName FROM Mst_TechType WHERE TypeName = 'BackEnd'),
+    ->     'https://www.javatpoint.com/spring-boot-tutorial',
+    ->     (SELECT Id FROM Mst_TechStack WHERE FrameWork = 'Spring Boot' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'BackEnd'),
+    ->     TRUE,
+    ->     'Description about the Java Backend program...',
+    ->     'Active',
+    ->     1
+    -> ),
+    -> (
+    ->     'React_Native_Mobile',
+    ->     (SELECT TypeName FROM Mst_TechType WHERE TypeName = 'Mobile'),
+    ->     'https://www.javatpoint.com/react-native-tutorial',
+    ->     (SELECT Id FROM Mst_TechStack WHERE FrameWork = 'React Native' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'Mobile'),
+    ->     TRUE,
+    ->     'Description about the React Native Mobile program...',
+    ->     'Active',
+    ->     2
+    -> );
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM MakerProgram;
++----+---------------------+-------------+--------------------------------------------------+-------------+------------+-------------------+------------------------------------------------------+--------+---------------------+-------------+
+| Id | ProgramName         | ProgramType | ProgramLink                                      | TechStackId | TechTypeId | IsProgramApproved | Description                                          | Status | CreatorStamp        | CreatorUser |
++----+---------------------+-------------+--------------------------------------------------+-------------+------------+-------------------+------------------------------------------------------+--------+---------------------+-------------+
+|  1 | Java_Full_Stack     | FullStack   | https://www.javatpoint.com/java-full-stack       |           1 |          1 |                 1 | Description about the Java Full Stack program...     | Active | 2023-12-11 14:24:19 |           2 |
+|  2 | ReactJs             | FrontEnd    | https://www.javatpoint.com/reactjs-tutorial      |           5 |          2 |                 1 | Description about the React Frontend program...      | Active | 2023-12-11 14:24:19 |           3 |
+|  3 | Angular_Full_Stack  | FullStack   | https://www.javatpoint.com/angularjs-tutorial    |        NULL |          1 |                 1 | Description about the Angular Full Stack program...  | Active | 2023-12-11 14:24:19 |           3 |
+|  4 | Java_Backend        | BackEnd     | https://www.javatpoint.com/spring-boot-tutorial  |           1 |          3 |                 1 | Description about the Java Backend program...        | Active | 2023-12-11 14:24:19 |           1 |
+|  5 | React_Native_Mobile | Mobile      | https://www.javatpoint.com/react-native-tutorial |           2 |          4 |                 1 | Description about the React Native Mobile program... | Active | 2023-12-11 14:24:19 |           2 |
++----+---------------------+-------------+--------------------------------------------------+-------------+------------+-------------------+------------------------------------------------------+--------+---------------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE MakerProgram SET TechStackId = (SELECT Id FROM Mst_TechStack WHERE TechName = 'Python' AND CurStatus = 'Active') where id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM MakerProgram;
++----+---------------------+-------------+--------------------------------------------------+-------------+------------+-------------------+------------------------------------------------------+--------+---------------------+-------------+
+| Id | ProgramName         | ProgramType | ProgramLink                                      | TechStackId | TechTypeId | IsProgramApproved | Description                                          | Status | CreatorStamp        | CreatorUser |
++----+---------------------+-------------+--------------------------------------------------+-------------+------------+-------------------+------------------------------------------------------+--------+---------------------+-------------+
+|  1 | Java_Full_Stack     | FullStack   | https://www.javatpoint.com/java-full-stack       |           1 |          1 |                 1 | Description about the Java Full Stack program...     | Active | 2023-12-11 14:24:19 |           2 |
+|  2 | ReactJs             | FrontEnd    | https://www.javatpoint.com/reactjs-tutorial      |           5 |          2 |                 1 | Description about the React Frontend program...      | Active | 2023-12-11 14:24:19 |           3 |
+|  3 | Angular_Full_Stack  | FullStack   | https://www.javatpoint.com/angularjs-tutorial    |           4 |          1 |                 1 | Description about the Angular Full Stack program...  | Active | 2023-12-11 14:24:19 |           3 |
+|  4 | Java_Backend        | BackEnd     | https://www.javatpoint.com/spring-boot-tutorial  |           1 |          3 |                 1 | Description about the Java Backend program...        | Active | 2023-12-11 14:24:19 |           1 |
+|  5 | React_Native_Mobile | Mobile      | https://www.javatpoint.com/react-native-tutorial |           2 |          4 |                 1 | Description about the React Native Mobile program... | Active | 2023-12-11 14:24:19 |           2 |
++----+---------------------+-------------+--------------------------------------------------+-------------+------------+-------------------+------------------------------------------------------+--------+---------------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Mentor (
+    ->     Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     Name VARCHAR(20),
+    ->     MentorType VARCHAR(20),
+    ->     LabId INT, 
+    ->     Status VARCHAR(20),
+    ->     CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     CreatorUser INT,
+    ->     FOREIGN KEY (LabId) REFERENCES Mst_Lab(Id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc Mentor;
++--------------+-------------+------+-----+-------------------+-------------------+
+| Field        | Type        | Null | Key | Default           | Extra             |
++--------------+-------------+------+-----+-------------------+-------------------+
+| Id           | int         | NO   | PRI | NULL              | auto_increment    |
+| Name         | varchar(20) | YES  |     | NULL              |                   |
+| MentorType   | varchar(20) | YES  |     | NULL              |                   |
+| LabId        | int         | YES  | MUL | NULL              |                   |
+| Status       | varchar(20) | YES  |     | NULL              |                   |
+| CreatorStamp | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser  | int         | YES  |     | NULL              |                   |
++--------------+-------------+------+-----+-------------------+-------------------+
+7 rows in set (0.01 sec)
+
+mysql> INSERT INTO Mentor (Name, MentorType, LabId, Status, CreatorUser)
+    -> VALUES
+    -> ('Sunil', 'Lead', 1, 'Active', 1),
+    -> ('Venkat', 'Ideation', 1, 'Active', 2),
+    -> ('Pooja', 'Ideation', 1, 'Active', 1),
+    -> ('Aishwarya', 'Buddy', 1, 'Active', 2),
+    -> ('Gunjan', 'Lead', 1, 'Active', 1),
+    -> ('Nagendra', 'Ideation', 1, 'Active', 3),
+    -> ('Roshni', 'Ideation', 1, 'Active', 3);
+Query OK, 7 rows affected (0.00 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Mentor (Name, MentorType, LabId, Status, CreatorUser)
+    -> VALUES
+    -> ('Ashish', 'Lead', 2, 'Active', 1),
+    -> ('Narayan', 'Ideation', 3, 'Active', 3),
+    -> ('Rohan', 'Ideation', 2, 'Active', 2);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Mentor;
++----+-----------+------------+-------+--------+---------------------+-------------+
+| Id | Name      | MentorType | LabId | Status | CreatorStamp        | CreatorUser |
++----+-----------+------------+-------+--------+---------------------+-------------+
+|  1 | Sunil     | Lead       |     1 | Active | 2023-12-11 14:26:19 |           1 |
+|  2 | Venkat    | Ideation   |     1 | Active | 2023-12-11 14:26:19 |           2 |
+|  3 | Pooja     | Ideation   |     1 | Active | 2023-12-11 14:26:19 |           1 |
+|  4 | Aishwarya | Buddy      |     1 | Active | 2023-12-11 14:26:19 |           2 |
+|  5 | Gunjan    | Lead       |     1 | Active | 2023-12-11 14:26:19 |           1 |
+|  6 | Nagendra  | Ideation   |     1 | Active | 2023-12-11 14:26:19 |           3 |
+|  7 | Roshni    | Ideation   |     1 | Active | 2023-12-11 14:26:19 |           3 |
+|  8 | Ashish    | Lead       |     2 | Active | 2023-12-11 14:26:24 |           1 |
+|  9 | Narayan   | Ideation   |     3 | Active | 2023-12-11 14:26:24 |           3 |
+| 10 | Rohan     | Ideation   |     2 | Active | 2023-12-11 14:26:24 |           2 |
++----+-----------+------------+-------+--------+---------------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> CREATE TABLE MentorIdeationMap (
+    ->     Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     ParentMentorId INT, 
+    ->     Status VARCHAR(20),
+    ->     CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     CreatorUser INT,
+    ->     FOREIGN KEY (ParentMentorId) REFERENCES Mentor(Id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc MentorIdeationMap;
++----------------+-------------+------+-----+-------------------+-------------------+
+| Field          | Type        | Null | Key | Default           | Extra             |
++----------------+-------------+------+-----+-------------------+-------------------+
+| Id             | int         | NO   | PRI | NULL              | auto_increment    |
+| ParentMentorId | int         | YES  | MUL | NULL              |                   |
+| Status         | varchar(20) | YES  |     | NULL              |                   |
+| CreatorStamp   | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser    | int         | YES  |     | NULL              |                   |
++----------------+-------------+------+-----+-------------------+-------------------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO MentorIdeationMap
+    -> (
+    -> ParentMentorId,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    -> Id,
+    ->     'Active',
+    ->     NOW(),
+    ->     1
+    -> FROM Mentor
+    -> WHERE Id =1;
+Query OK, 1 row affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MentorIdeationMap
+    -> (
+    -> ParentMentorId,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    -> Id,
+    ->     'Active',
+    ->     NOW(),
+    ->     2
+    -> FROM Mentor
+    -> WHERE Id =2;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MentorIdeationMap
+    -> (
+    -> ParentMentorId,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    -> Id,
+    ->     'Active',
+    ->     NOW(),
+    ->     3
+    -> FROM Mentor
+    -> WHERE Id =3;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MentorIdeationMap
+    -> (
+    -> ParentMentorId,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    -> Id,
+    ->     'Active',
+    ->     NOW(),
+    ->     1
+    -> FROM Mentor
+    -> WHERE Id =4;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MentorIdeationMap
+    -> (
+    -> ParentMentorId,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    -> Id,
+    ->     'Active',
+    ->     NOW(),
+    ->     1
+    -> FROM Mentor
+    -> WHERE Id =5;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MentorIdeationMap
+    -> (
+    -> ParentMentorId,
+    ->     Status,
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> SELECT
+    -> Id,
+    ->     'Active',
+    ->     NOW(),
+    ->     2
+    -> FROM Mentor
+    -> WHERE Id =6;
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM MentorIdeationMap;
++----+----------------+--------+---------------------+-------------+
+| Id | ParentMentorId | Status | CreatorStamp        | CreatorUser |
++----+----------------+--------+---------------------+-------------+
+|  1 |              1 | Active | 2023-12-11 14:28:12 |           1 |
+|  2 |              2 | Active | 2023-12-11 14:28:12 |           2 |
+|  3 |              3 | Active | 2023-12-11 14:28:12 |           3 |
+|  4 |              4 | Active | 2023-12-11 14:28:12 |           1 |
+|  5 |              5 | Active | 2023-12-11 14:28:12 |           1 |
+|  6 |              6 | Active | 2023-12-11 14:28:16 |           2 |
++----+----------------+--------+---------------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE MentorTechStack (
+    ->     Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     MentorId INT,
+    ->     TechStackId INT, 
+    ->     Status VARCHAR(20),
+    ->     CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     CreatorUser INT,
+    ->     FOREIGN KEY (MentorId) REFERENCES Mentor(Id),
+    ->     FOREIGN KEY (TechStackId) REFERENCES Mst_TechStack(Id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc MentorTechStack;
++--------------+-------------+------+-----+-------------------+-------------------+
+| Field        | Type        | Null | Key | Default           | Extra             |
++--------------+-------------+------+-----+-------------------+-------------------+
+| Id           | int         | NO   | PRI | NULL              | auto_increment    |
+| MentorId     | int         | YES  | MUL | NULL              |                   |
+| TechStackId  | int         | YES  | MUL | NULL              |                   |
+| Status       | varchar(20) | YES  |     | NULL              |                   |
+| CreatorStamp | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser  | int         | YES  |     | NULL              |                   |
++--------------+-------------+------+-----+-------------------+-------------------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO MentorTechStack 
+    -> (
+    -> MentorId,
+    -> TechStackId, 
+    ->     Status, 
+    ->     CreatorStamp,
+    ->     CreatorUser
+    -> )
+    -> VALUES
+    -> (
+    -> (SELECT Id FROM Mentor WHERE Id = 1),
+    ->     (SELECT Id FROM Mst_TechStack WHERE Id =1),
+    ->     'Active',
+    ->     NOW(),
+    ->     1
+    -> ),
+    -> (
+    -> (SELECT Id FROM Mentor WHERE Id = 2),
+    ->     (SELECT Id FROM Mst_TechStack WHERE Id =2),
+    ->     'Active',
+    ->     NOW(),
+    ->     2
+    -> ),
+    -> (
+    -> (SELECT Id FROM Mentor WHERE Id = 3),
+    ->     (SELECT Id FROM Mst_TechStack WHERE Id =4),
+    ->     'Active',
+    ->     NOW(),
+    ->     3
+    -> ),
+    -> (
+    -> (SELECT Id FROM Mentor WHERE Id = 4),
+    ->     (SELECT Id FROM Mst_TechStack WHERE Id =3),
+    ->     'Active',
+    ->     NOW(),
+    ->     1
+    -> ),
+    -> (
+    -> (SELECT Id FROM Mentor WHERE Id = 5),
+    ->     (SELECT Id FROM Mst_TechStack WHERE Id =6),
+    ->     'Active',
+    ->     NOW(),
+    ->     1
+    -> ),
+    -> (
+    -> (SELECT Id FROM Mentor WHERE Id = 6),
+    ->     (SELECT Id FROM Mst_TechStack WHERE Id =5),
+    ->     'Active',
+    ->     NOW(),
+    ->     1
+    -> );
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM MentorTechStack;
++----+----------+-------------+--------+---------------------+-------------+
+| Id | MentorId | TechStackId | Status | CreatorStamp        | CreatorUser |
++----+----------+-------------+--------+---------------------+-------------+
+|  1 |        1 |           1 | Active | 2023-12-11 14:29:52 |           1 |
+|  2 |        2 |           2 | Active | 2023-12-11 14:29:52 |           2 |
+|  3 |        3 |           4 | Active | 2023-12-11 14:29:52 |           3 |
+|  4 |        4 |           3 | Active | 2023-12-11 14:29:52 |           1 |
+|  5 |        5 |           6 | Active | 2023-12-11 14:29:52 |           1 |
+|  6 |        6 |           5 | Active | 2023-12-11 14:29:52 |           1 |
++----+----------+-------------+--------+---------------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE CompanyRequirement (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     company_id INT,
+    ->     requested_month DATE,
+    ->     city VARCHAR(20),
+    ->     is_doc_verification BOOLEAN,
+    ->     requirement_doc_path VARCHAR(100),
+    ->     no_of_engg INT,
+    ->     tech_stack_id INT,
+    ->     tech_type_id INT,
+    ->     maker_program_id INT, 
+    ->     lead_id INT, 
+    ->     ideation_engg_id INT, 
+    ->     buddy_engg_id INT, 
+    ->     special_remark TEXT,
+    ->     Status VARCHAR(20),
+    ->     creator_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     creator_user INT,
+    ->     FOREIGN KEY (company_id) REFERENCES Mst_Company(Id),
+    ->     FOREIGN KEY (tech_stack_id) REFERENCES Mst_TechStack(Id),
+    ->     FOREIGN KEY (tech_type_id) REFERENCES Mst_TechType(Id),
+    ->     FOREIGN KEY (maker_program_id) REFERENCES MakerProgram(Id),
+    ->     FOREIGN KEY (lead_id) REFERENCES Mentor(Id),
+    ->     FOREIGN KEY (ideation_engg_id) REFERENCES Mentor(Id), 
+    ->     FOREIGN KEY (buddy_engg_id) REFERENCES Mentor(Id)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc CompanyRequirement;
++----------------------+--------------+------+-----+-------------------+-------------------+
+| Field                | Type         | Null | Key | Default           | Extra             |
++----------------------+--------------+------+-----+-------------------+-------------------+
+| id                   | int          | NO   | PRI | NULL              | auto_increment    |
+| company_id           | int          | YES  | MUL | NULL              |                   |
+| requested_month      | date         | YES  |     | NULL              |                   |
+| city                 | varchar(20)  | YES  |     | NULL              |                   |
+| is_doc_verification  | tinyint(1)   | YES  |     | NULL              |                   |
+| requirement_doc_path | varchar(100) | YES  |     | NULL              |                   |
+| no_of_engg           | int          | YES  |     | NULL              |                   |
+| tech_stack_id        | int          | YES  | MUL | NULL              |                   |
+| tech_type_id         | int          | YES  | MUL | NULL              |                   |
+| maker_program_id     | int          | YES  | MUL | NULL              |                   |
+| lead_id              | int          | YES  | MUL | NULL              |                   |
+| ideation_engg_id     | int          | YES  | MUL | NULL              |                   |
+| buddy_engg_id        | int          | YES  | MUL | NULL              |                   |
+| special_remark       | text         | YES  |     | NULL              |                   |
+| Status               | varchar(20)  | YES  |     | NULL              |                   |
+| creator_stamp        | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| creator_user         | int          | YES  |     | NULL              |                   |
++----------------------+--------------+------+-----+-------------------+-------------------+
+17 rows in set (0.00 sec)
+
+mysql> INSERT INTO CompanyRequirement (
+    ->     company_id,
+    ->     requested_month,
+    ->     city,
+    ->     is_doc_verification,
+    ->     requirement_doc_path,
+    ->     no_of_engg,
+    ->     tech_stack_id,
+    ->     tech_type_id,
+    ->     maker_program_id,
+    ->     lead_id,
+    ->     ideation_engg_id,
+    ->     buddy_engg_id,
+    ->     special_remark,
+    ->     Status,
+    ->     creator_user
+    -> )
+    -> VALUES
+    -> (
+    ->     (SELECT Id FROM Mst_Company WHERE Name = 'IBM'),
+    ->     '2023-12-01', 
+    ->     'CityName',  
+    ->     true,
+    ->     '/documents/requirement_doc.pdf', 
+    ->     5,           
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'Java' AND Framework = 'Spring Boot' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'Java_Full_Stack'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Sunil' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Venkat' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Aishwarya' AND MentorType = 'Buddy' AND Status = 'Active'),
+    ->     'Excellent',
+    ->     'Active',
+    ->     1 
+    -> );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> 
+mysql> INSERT INTO CompanyRequirement (
+    ->     company_id,
+    ->     requested_month,
+    ->     city,
+    ->     is_doc_verification,
+    ->     requirement_doc_path,
+    ->     no_of_engg,
+    ->     tech_stack_id,
+    ->     tech_type_id,
+    ->     maker_program_id,
+    ->     lead_id,
+    ->     ideation_engg_id,
+    ->     buddy_engg_id,
+    ->     special_remark,
+    ->     Status,
+    ->     creator_user
+    -> )
+    -> VALUES
+    -> (
+    ->     (SELECT Id FROM Mst_Company WHERE Name = 'Hewlett Packard'),
+    ->     '2023-12-01',
+    ->     'Bangalore',
+    ->     true,
+    ->     '/documents/Hewlett Packard.pdf',
+    ->     8,
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'React' AND Framework = 'Node.js' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'ReactJs'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Ashish' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Narayan' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Rohan' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     'Excellent',
+    ->     'Active',
+    ->     2
+    -> ),
+    -> (
+    -> (SELECT Id FROM Mst_Company WHERE Name = 'Cisco Systems'),
+    ->     '2023-12-01',
+    ->     'Delhi',
+    ->     true,
+    ->     '/documents/Cisco Systems.pdf',
+    ->     5,
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'Java' AND Framework = 'Spring Boot' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'BackEnd'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'Java_Backend'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Sunil' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Venkat' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Pooja' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     'Good',
+    ->     'Active',
+    ->     3
+    -> ),
+    -> (
+    -> (SELECT Id FROM Mst_Company WHERE Name = 'Intel Corporation'),
+    ->     '2023-12-01',
+    ->     'Mumbai',
+    ->     true,
+    ->     '/documents/Intel Corporation.pdf',
+    ->     500,
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'React Native' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'Mobile'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'React_Native_Mobile'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Nagendra' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Roshni' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Aishwarya' AND MentorType = 'Buddy' AND Status = 'Active'),
+    ->     'Good',
+    ->     'Active',
+    ->     2
+    -> ),
+    -> (
+    ->     (SELECT Id FROM Mst_Company WHERE Name = 'Adobe Inc.'),
+    ->     '2023-12-01',
+    ->     'Noida',
+    ->     true,
+    ->     NULL,
+    ->     50,
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'Java' AND Framework = 'Spring Boot' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'Java_Full_Stack'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Sunil' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Pooja' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Gunjan' AND MentorType = 'Buddy' AND Status = 'Active'),
+    ->     'Excellent',
+    ->     'Active',
+    ->     3
+    -> ),
+    -> (
+    ->     (SELECT Id FROM Mst_Company WHERE Name = 'Facebook'),
+    ->     '2023-06-01',
+    ->     'Maxico',
+    ->     true,
+    ->     '/documents/Facebook.pdf',
+    ->     10,
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'React' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FrontEnd'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'ReactJs'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Ashish' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Rohan' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Narayan' AND MentorType = 'Buddy' AND Status = 'Active'),
+    ->     'Excellent',
+    ->     'Active',
+    ->     1
+    -> ),
+    -> (
+    ->     (SELECT Id FROM Mst_Company WHERE Name = 'Twitter'),
+    ->     '2022-12-21',
+    ->     'Pune',
+    ->     true,
+    ->     '/documents/Twitter.pdf',
+    ->     80,
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'Angular' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'Angular_Full_Stack'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Gunjan' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Nagendra' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Roshni' AND MentorType = 'Buddy' AND Status = 'Active'),
+    ->     'Good',
+    ->     'Active',
+    ->     2
+    -> ),
+    -> (
+    ->     (SELECT Id FROM Mst_Company WHERE Name = 'LinkedIn'),
+    ->     '2023-12-01',
+    ->     'Mumbai',
+    ->     true,
+    ->     '/documents/LinkedIn.pdf',
+    ->     5,
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'Java' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FullStack'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'Java_Full_Stack'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Sunil' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Venkat' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Aishwarya' AND MentorType = 'Buddy' AND Status = 'Active'),
+    ->     'Excellent',
+    ->     'Active',
+    ->     1
+    -> ),
+    -> (
+    ->     (SELECT Id FROM Mst_Company WHERE Name = 'QualityKiosk'),
+    ->     '2023-12-01',
+    ->     'Mumbai',
+    ->     true,
+    ->     '/documents/QualityKiosk.pdf',
+    ->     8,
+    ->     (SELECT Id FROM Mst_TechStack WHERE TechName = 'React' AND CurStatus = 'Active'),
+    ->     (SELECT Id FROM Mst_TechType WHERE TypeName = 'FrontEnd'),
+    ->     (SELECT Id FROM MakerProgram WHERE ProgramName = 'ReactJs'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Ashish' AND MentorType = 'Lead' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Rohan' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     (SELECT Id FROM Mentor WHERE Name = 'Narayan' AND MentorType = 'Ideation' AND Status = 'Active'),
+    ->     'Excellent',
+    ->     'Active',
+    ->     1
+    -> );
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from CompanyRequirement;
++----+------------+-----------------+-----------+---------------------+----------------------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------+--------+---------------------+--------------+
+| id | company_id | requested_month | city      | is_doc_verification | requirement_doc_path             | no_of_engg | tech_stack_id | tech_type_id | maker_program_id | lead_id | ideation_engg_id | buddy_engg_id | special_remark | Status | creator_stamp       | creator_user |
++----+------------+-----------------+-----------+---------------------+----------------------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------+--------+---------------------+--------------+
+|  1 |          1 | 2023-12-01      | CityName  |                   1 | /documents/requirement_doc.pdf   |          5 |             1 |            1 |                1 |       1 |                2 |             4 | Excellent      | Active | 2023-12-11 16:54:48 |            1 |
+|  2 |          2 | 2023-12-01      | Bangalore |                   1 | /documents/Hewlett Packard.pdf   |          8 |          NULL |            1 |                2 |       8 |                9 |            10 | Excellent      | Active | 2023-12-11 16:54:53 |            2 |
+|  3 |          3 | 2023-12-01      | Delhi     |                   1 | /documents/Cisco Systems.pdf     |          5 |             1 |            3 |                4 |       1 |                2 |             3 | Good           | Active | 2023-12-11 16:54:53 |            3 |
+|  4 |          4 | 2023-12-01      | Mumbai    |                   1 | /documents/Intel Corporation.pdf |        500 |          NULL |            4 |                5 |    NULL |                7 |             4 | Good           | Active | 2023-12-11 16:54:53 |            2 |
+|  5 |          5 | 2023-12-01      | Noida     |                   1 | NULL                             |         50 |             1 |            1 |                1 |       1 |                3 |          NULL | Excellent      | Active | 2023-12-11 16:54:53 |            3 |
+|  6 |          6 | 2023-06-01      | Maxico    |                   1 | /documents/Facebook.pdf          |         10 |          NULL |            2 |                2 |       8 |               10 |          NULL | Excellent      | Active | 2023-12-11 16:54:53 |            1 |
+|  7 |          7 | 2022-12-21      | Pune      |                   1 | /documents/Twitter.pdf           |         80 |          NULL |            1 |                3 |       5 |                6 |          NULL | Good           | Active | 2023-12-11 16:54:53 |            2 |
+|  8 |          8 | 2023-12-01      | Mumbai    |                   1 | /documents/LinkedIn.pdf          |          5 |             1 |            1 |                1 |       1 |                2 |             4 | Excellent      | Active | 2023-12-11 16:54:53 |            1 |
+|  9 |         10 | 2023-12-01      | Mumbai    |                   1 | /documents/QualityKiosk.pdf      |          8 |          NULL |            2 |                2 |       8 |               10 |             9 | Excellent      | Active | 2023-12-11 16:54:53 |            1 |
++----+------------+-----------------+-----------+---------------------+----------------------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------+--------+---------------------+--------------+
+9 rows in set (0.00 sec)
+
+mysql> CREATE TABLE CandidateStackAssignment (
+    ->     Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     RequirementId INT,
+    ->     CandidateId VARCHAR(20),
+    ->     AssignDate DATE,
+    ->     CompleteDate DATE,
+    ->     Status VARCHAR(20),
+    ->     CreatorStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     CreatorUser INT,
+    ->     FOREIGN KEY (RequirementId) REFERENCES CompanyRequirement(Id),
+    ->     FOREIGN KEY (CandidateId) REFERENCES FellowshipCandidate(CandidateId)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc CandidateStackAssignment;
++---------------+-------------+------+-----+-------------------+-------------------+
+| Field         | Type        | Null | Key | Default           | Extra             |
++---------------+-------------+------+-----+-------------------+-------------------+
+| Id            | int         | NO   | PRI | NULL              | auto_increment    |
+| RequirementId | int         | YES  | MUL | NULL              |                   |
+| CandidateId   | varchar(20) | YES  | MUL | NULL              |                   |
+| AssignDate    | date        | YES  |     | NULL              |                   |
+| CompleteDate  | date        | YES  |     | NULL              |                   |
+| Status        | varchar(20) | YES  |     | NULL              |                   |
+| CreatorStamp  | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| CreatorUser   | int         | YES  |     | NULL              |                   |
++---------------+-------------+------+-----+-------------------+-------------------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO CandidateStackAssignment (
+    ->     RequirementId,
+    ->     CandidateId,
+    ->     AssignDate,
+    ->     CompleteDate,
+    ->     Status,
+    ->     CreatorUser
+    -> )
+    -> VALUES
+    -> (
+    ->     (SELECT Id FROM CompanyRequirement WHERE company_id = (SELECT Id FROM Mst_Company WHERE Name = 'IBM')),
+    ->     (SELECT CandidateId FROM FellowshipCandidate WHERE CandidateId = 'CandidateId00001'),
+    ->     '2023-10-16',
+    ->     NULL, 
+    ->     'Assigned',
+    ->     1
+    -> ),
+    -> (
+    ->     (SELECT Id FROM CompanyRequirement WHERE company_id = (SELECT Id FROM Mst_Company WHERE Name = 'Hewlett Packard')),
+    ->     (SELECT CandidateId FROM FellowshipCandidate WHERE CandidateId = 'CandidateId00002'),
+    ->     '2023-09-16',
+    ->     NULL, 
+    ->     'Assigned',
+    ->     2
+    -> ),
+    -> (
+    ->     (SELECT Id FROM CompanyRequirement WHERE company_id = (SELECT Id FROM Mst_Company WHERE Name = 'Cisco Systems')),
+    ->     (SELECT CandidateId FROM FellowshipCandidate WHERE CandidateId = 'CandidateId00005'),
+    ->     '2023-10-20',
+    ->     NULL, 
+    ->     'Assigned',
+    ->     3
+    -> );
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CandidateStackAssignment;
++----+---------------+------------------+------------+--------------+----------+---------------------+-------------+
+| Id | RequirementId | CandidateId      | AssignDate | CompleteDate | Status   | CreatorStamp        | CreatorUser |
++----+---------------+------------------+------------+--------------+----------+---------------------+-------------+
+|  1 |             1 | CandidateId00001 | 2023-10-16 | NULL         | Assigned | 2023-12-11 16:56:50 |           1 |
+|  2 |             2 | CandidateId00002 | 2023-09-16 | NULL         | Assigned | 2023-12-11 16:56:50 |           2 |
+|  3 |             3 | CandidateId00005 | 2023-10-20 | NULL         | Assigned | 2023-12-11 16:56:50 |           3 |
++----+---------------+------------------+------------+--------------+----------+---------------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------------------------------+
+| Tables_in_learning_management_systems |
++---------------------------------------+
+| candidatebankdetails                  |
+| candidatedocuments                    |
+| candidatequalification                |
+| candidatestackassignment              |
+| companyrequirement                    |
+| fellowshipcandidate                   |
+| labthreshold                          |
+| makerprogram                          |
+| mentor                                |
+| mentorideationmap                     |
+| mentortechstack                       |
+| mst_appparameters                     |
+| mst_company                           |
+| mst_hiredcandidate                    |
+| mst_lab                               |
+| mst_techstack                         |
+| mst_techtype                          |
+| mst_userdetails                       |
++---------------------------------------+
+18 rows in set (0.01 sec)
+
+mysql> notee
